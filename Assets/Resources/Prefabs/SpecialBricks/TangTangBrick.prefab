@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8942507938670015161}
   - component: {fileID: 2443818029759372722}
   - component: {fileID: -8996405804509107586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TangTangBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}

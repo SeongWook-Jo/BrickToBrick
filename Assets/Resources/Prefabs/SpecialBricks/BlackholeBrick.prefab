@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5391120152950670344}
   - component: {fileID: 8074768678721039897}
   - component: {fileID: 1867400558305274639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlackholeBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}

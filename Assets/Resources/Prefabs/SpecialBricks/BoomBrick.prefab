@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7051976440627196088}
   - component: {fileID: 8147276335797983747}
   - component: {fileID: -6130974101487755996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BoomBrick
   m_TagString: Brick
   m_Icon: {fileID: 0}
