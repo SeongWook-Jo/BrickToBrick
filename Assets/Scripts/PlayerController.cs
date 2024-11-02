@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
                         curGaugePower = powerGauge.GetCurGauge();
                         curTargetDir = targetArrow.CurDir;
+                        powerGauge.gameObject.SetActive(false);
 
                         curState = State.Fire;
                     }
