@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
         {
             case State.Init:
                 {
-                    targetArrow.gameObject.SetActive(false);
                     powerGauge.gameObject.SetActive(false);
                     coolTimeGauge.gameObject.SetActive(true);
                     coolTimeGauge.InitGauage(fireCoolTime);
@@ -60,7 +59,6 @@ public class PlayerController : MonoBehaviour
                         break;
                     }
                     
-                    targetArrow.gameObject.SetActive(true);
                     curState = State.ArrowTargeting;
                 }
                 break;
@@ -68,13 +66,9 @@ public class PlayerController : MonoBehaviour
                 {
                     //마우스 따라서 화살표 조준하기
                     curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    targetArrow.RotateToTargetPos(curTargetPos);
+                    curTargetDir = (curTargetPos - transform.position).normalized;
 
-                    //클릭하면 파워 게이지 보여주기
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        curState = State.PowerGauge;
-                    }
+                    curState = State.PowerGauge;
                 }
                 break;
             case State.PowerGauge:
@@ -91,8 +85,7 @@ public class PlayerController : MonoBehaviour
                                 characterAnimator.SetTrigger("Throw");
                         }
 
-                        curGaugePower = powerGauge.GetCurGauge();
-                        curTargetDir = targetArrow.CurDir;
+                        curGaugePower = powerGauge.GetCurGauge();                        
                         powerGauge.gameObject.SetActive(false);
 
                         curState = State.Fire;
