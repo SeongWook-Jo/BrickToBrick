@@ -21,29 +21,20 @@ public class Brick : MonoBehaviour
 
     public bool IsLaunched { get; private set; }
 
-    private MeshCollider _meshCollider;
-    private MeshRenderer _meshRenderer;
     private Rigidbody _rigidbody;
-    private MeshFilter _meshFilter;
 
     public void Init()
     {
         IsLaunched = false;
 
-        _meshCollider = GetComponent<MeshCollider>();
         _rigidbody = GetComponent<Rigidbody>();
-        _meshFilter = GetComponent<MeshFilter>();
 
         InitDetail();
     }
 
     public virtual void InitDetail()
     {
-        var mesh = BrickManager.Instance.GetNormalBrickMesh();
 
-        _meshCollider.sharedMesh = mesh;
-
-        _meshFilter.mesh = mesh;
     }
 
     public void Launch(Vector2 dir, float power)
@@ -75,7 +66,7 @@ public class Brick : MonoBehaviour
 
     protected Collider[] GetNearbyBrickCollider(float radius)
     {
-        return Physics.OverlapSphere(transform.position, radius);
+        return Physics.OverlapSphere(transform.position, radius, 1 << LayerMask.NameToLayer("Brick"));
     }
 
     public void ChageBrick()

@@ -32,10 +32,7 @@ public class BlackholeBrick : Brick
 
         foreach (var col in colliders)
         {
-            if (col.CompareTag("Brick") == false)
-                continue;
-
-            var brick = col.GetComponent<Brick>();
+            var brick = col.GetComponentInParent<Brick>();
 
             var dir = transform.position - col.transform.position;
 

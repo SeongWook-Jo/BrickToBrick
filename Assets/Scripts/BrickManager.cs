@@ -5,20 +5,17 @@ using UnityEngine;
 
 public class BrickManager : Singleton<BrickManager>
 {
-    public Mesh[] meshs;
+    public Brick[] bricks;
 
     private void Awake()
     {
-        var models = Resources.LoadAll<Mesh>("Model");
-
-        meshs = new Mesh[models.Length];
-
-        for (int i = 0; i < models.Length;i++)
-            meshs[i] = models[i];
+        bricks = Resources.LoadAll<Brick>("NormalBricks");
     }
 
-    public Mesh GetNormalBrickMesh()
+    public Brick GetNewNormalBrick()
     {
-        return meshs[Random.Range(0, meshs.Length)];
+        var newBrick = bricks[Random.Range(0, bricks.Length)];
+
+        return Instantiate(newBrick);
     }
 }

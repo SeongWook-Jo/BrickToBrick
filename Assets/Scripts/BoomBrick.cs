@@ -16,10 +16,7 @@ public class BoomBrick : Brick
 
         foreach (var col in colliders)
         {
-            if (col.CompareTag("Brick") == false)
-                continue;
-
-            var brick = col.GetComponent<Brick>();
+            var brick = col.GetComponentInParent<Brick>();
 
             brick.Rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
         }
