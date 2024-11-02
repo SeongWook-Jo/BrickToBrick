@@ -2,30 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class EnemyController : PlayerController
 {
-    public enum State
-    {
-        Init,
-        Idle,               //평상
-        ArrowTargeting,     //조준
-        PowerGauge,         //파워 조절
-        Fire                //발사        
-    }
+    [SerializeField] float arrowTargetingDelay_Max;
+    [SerializeField] float arrowTargetingDelay_Min;
+    [SerializeField] float remainArrowTargetingDelay; //화살표 방향 정하는 딜레이
 
-    [SerializeField]
-    protected GameObject curBrickPrefab;
+    [SerializeField] float powerGaugeMin;
+    [SerializeField] float powerGaugeMax;    
+    [SerializeField] float targetPowerGauge;      //파워 게이지 정하는 딜레이
 
-    [SerializeField] protected TargetArrow targetArrow;       //방향 화살표
-    [SerializeField] protected Gauge powerGauge;              //파워 게이지
-    [SerializeField] protected Gauge coolTimeGauge;           //쿨탐 게이지
-
-    [SerializeField] protected float fireCoolTime;
-    [SerializeField] protected float firePower;
-
-    protected Vector3 curTargetPos = Vector3.zero;
-
-    public State curState = State.Idle;
+    float targetAngle_Min = 110f;
+    float curTargetAngle;
+    float angleTimer = 0;
 
     void Update()
     {
@@ -43,23 +32,36 @@ public class PlayerController : MonoBehaviour
             case State.Idle:
                 {
                     //쿨타임 게이지 다 찰떄까지 대기
-                    if(coolTimeGauge.GetCurGauge() < 1)
+                    if (coolTimeGauge.GetCurGauge() < 1)
                     {
                         break;
                     }
-                    
+
+                    //방향 정하는 딜레이
+                    remainArrowTargetingDelay = Random.Range(arrowTargetingDelay_Min, arrowTargetingDelay_Max);
+                    //파워 정하기
+                    targetPowerGauge = Random.Range(powerGaugeMin, powerGaugeMax);
+
                     targetArrow.gameObject.SetActive(true);
+
                     curState = State.ArrowTargeting;
                 }
                 break;
             case State.ArrowTargeting:
                 {
-                    //마우스 따라서 화살표 조준하기
-                    curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    targetArrow.RotateToTargetPos(curTargetPos);
+                    //위아래로 화살표 조준하기
+                    angleTimer += Time.deltaTime * 90;  //초당 90도
+                    if (angleTimer >= 180)
+                        angleTimer = 0;
 
-                    //클릭하면 파워 게이지 보여주기
-                    if (Input.GetMouseButtonDown(0))
+                    curTargetAngle = targetAngle_Min + (Mathf.Sin(angleTimer * Mathf.Deg2Rad) * 70);
+                    
+                    //각도로 회전시키고 방향값 가져오기
+                    curTargetPos = targetArrow.RotateToTargetAngle(curTargetAngle);
+
+                    //시간 다 지나면 자동으로 다음 단계로 이동
+                    remainArrowTargetingDelay -= Time.deltaTime;
+                    if (remainArrowTargetingDelay <= 0)
                     {
                         curState = State.PowerGauge;
                     }
@@ -70,8 +72,9 @@ public class PlayerController : MonoBehaviour
                     if (powerGauge.gameObject.activeSelf == false)
                         powerGauge.gameObject.SetActive(true);
 
-                    //클릭하면 발사
-                    if (Input.GetMouseButtonDown(0))
+                    //파워 게이지 타겟범위 안에 들어오면 발사 오차 +- 0.02f
+                    float tempCurPowerGauge = powerGauge.GetCurGauge();
+                    if (targetPowerGauge - 0.02f <= tempCurPowerGauge && tempCurPowerGauge <= targetPowerGauge + 0.02f)
                     {
                         curState = State.Fire;
                     }
@@ -95,5 +98,4 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-
 }
