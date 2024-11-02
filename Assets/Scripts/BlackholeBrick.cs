@@ -26,9 +26,9 @@ public class BlackholeBrick : Brick
 
         _currTime += Time.fixedDeltaTime;
 
-        var colliders = Physics.OverlapSphere(transform.position, radius);
+        var colliders = GetNearbyBrickCollider(radius);
 
-        foreach(var col in colliders)
+        foreach (var col in colliders)
         {
             if (col.CompareTag("Brick") == false)
                 continue;
@@ -39,7 +39,7 @@ public class BlackholeBrick : Brick
 
             dir.Normalize();
 
-            brick.rigidbody.AddForce(dir * pullForce);
+            brick.Rigidbody.AddForce(dir * pullForce);
         }
     }
 }

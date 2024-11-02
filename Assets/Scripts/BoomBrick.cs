@@ -8,12 +8,9 @@ public class BoomBrick : Brick
     public float force;
     public float radius;
 
-    protected virtual void OnTrigger()
+    protected override void OnTriggerDetail()
     {
-        if (IsLaunched == false)
-            return;
-
-        var colliders = Physics.OverlapSphere(transform.position, radius);
+        var colliders = GetNearbyBrickCollider(radius);
 
         foreach (var col in colliders)
         {
@@ -22,7 +19,7 @@ public class BoomBrick : Brick
 
             var brick = col.GetComponent<Brick>();
 
-            brick.rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
+            brick.Rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
         }
     }
 }

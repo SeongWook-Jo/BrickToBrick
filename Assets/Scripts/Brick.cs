@@ -5,24 +5,20 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public MeshCollider meshCollider;
-    public Rigidbody rigidbody;
+    public Rigidbody Rigidbody { get => _rigidbody;}
 
     public bool IsLaunched { get; private set; }
 
-    public float testX;
-    public float testY;
-    public float testPower;
-
-    [ContextMenu("test")]
-    public void TestCode()
-    {
-        Launch(new Vector2(testX, testY), testPower);
-    }
+    private MeshCollider _meshCollider;
+    private Rigidbody _rigidbody;
 
     public void Init()
     {
         IsLaunched = false;
+
+        _meshCollider = GetComponent<MeshCollider>();
+
+        _rigidbody = GetComponent<Rigidbody>();
 
         InitDetail();
     }
@@ -38,7 +34,7 @@ public class Brick : MonoBehaviour
 
         dir = dir.normalized;
 
-        rigidbody.AddForce(dir * power, ForceMode.Impulse);
+        _rigidbody.AddForce(dir * power, ForceMode.Impulse);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -49,7 +45,25 @@ public class Brick : MonoBehaviour
         OnTrigger();
     }
 
-    protected virtual void OnTrigger()
+    protected void OnTrigger()
+    {
+        if (IsLaunched == false)
+            return;
+
+        OnTriggerDetail();
+    }
+
+    protected virtual void OnTriggerDetail()
+    {
+
+    }
+
+    protected Collider[] GetNearbyBrickCollider(float radius)
+    {
+        return Physics.OverlapSphere(transform.position, radius);
+    }
+
+    public void ChageBrick()
     {
 
     }
