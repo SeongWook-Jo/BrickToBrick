@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BoomBrick : Brick
 {
+    public override BrickType Type { get => BrickType.Boom; }
+
     public float force;
     public float radius;
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ChangeBrick : Brick
 {
+    public override BrickType Type { get => BrickType.Chnage; }
+
     public float radius;
 
     protected override void OnTriggerDetail()

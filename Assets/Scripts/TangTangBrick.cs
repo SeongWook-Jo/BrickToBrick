@@ -5,5 +5,6 @@ using UnityEngine;
 
 public class TangTangBrick : Brick
 {
+    public override BrickType Type { get => BrickType.TangTang; }
 
 }

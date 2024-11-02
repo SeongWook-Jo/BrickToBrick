@@ -5,27 +5,44 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public Rigidbody Rigidbody { get => _rigidbody;}
+    public enum BrickType
+    {
+        Normal,
+        Boom,
+        Blackhole,
+        Chnage,
+        RandomBox,
+        TangTang,
+    }
+
+    public virtual BrickType Type { get => BrickType.Normal; }
+
+    public Rigidbody Rigidbody { get => _rigidbody; }
 
     public bool IsLaunched { get; private set; }
 
     private MeshCollider _meshCollider;
     private Rigidbody _rigidbody;
+    private MeshFilter _meshFilter;
 
     public void Init()
     {
         IsLaunched = false;
 
         _meshCollider = GetComponent<MeshCollider>();
-
         _rigidbody = GetComponent<Rigidbody>();
+        _meshFilter = GetComponent<MeshFilter>();
 
         InitDetail();
     }
 
     public virtual void InitDetail()
     {
+        var mesh = BrickManager.Instance.GetNormalBrickMesh();
 
+        _meshCollider.sharedMesh = mesh;
+
+        _meshFilter.mesh = mesh;
     }
 
     public void Launch(Vector2 dir, float power)
@@ -39,9 +56,6 @@ public class Brick : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Brick") == false)
-            return;
-
         OnTrigger();
     }
 
@@ -65,6 +79,9 @@ public class Brick : MonoBehaviour
 
     public void ChageBrick()
     {
+        if (Type != BrickType.Normal)
+            return;
 
+        
     }
 }
