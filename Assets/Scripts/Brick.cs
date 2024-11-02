@@ -71,6 +71,8 @@ public class Brick : MonoBehaviour
     {
         IsLaunched = true;
 
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.BrickThrow, false);
+
         dir = dir.normalized;
 
         rigidbody.AddForce(dir * power, ForceMode.Impulse);
