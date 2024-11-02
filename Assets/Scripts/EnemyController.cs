@@ -85,11 +85,7 @@ public class EnemyController : PlayerController
                     float tempGaugePower = powerGauge.GetCurGauge();
                     Vector3 targetDir = targetArrow.CurDir;
 
-                    //브릭 생성 또는 Pool에서 가져오기
-                    GameObject brickObj = PoolManager.Instance.Get(curBrickPrefab, transform.position);
-
-                    //던지기
-                    Brick tempBrick = brickObj.GetComponent<Brick>();
+                    Brick tempBrick = GetNewBrick();
                     tempBrick.Init();
                     tempBrick.Launch(targetDir, firePower * tempGaugePower);
 
@@ -97,5 +93,12 @@ public class EnemyController : PlayerController
                 }
                 break;
         }
+    }
+
+    protected override Brick GetNewBrick()
+    {
+        var newBrick = _stageManager.GetEnemyBrick();
+
+        return Instantiate(newBrick, transform);
     }
 }

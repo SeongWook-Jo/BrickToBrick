@@ -17,24 +17,21 @@ public class Brick : MonoBehaviour
 
     public virtual BrickType Type { get => BrickType.Normal; }
 
-    public Rigidbody Rigidbody { get => _rigidbody; }
+    public Rigidbody rigidbody;
 
     public bool IsLaunched { get; private set; }
 
-    private Rigidbody _rigidbody;
 
     public void Init()
     {
         IsLaunched = false;
-
-        _rigidbody = GetComponent<Rigidbody>();
 
         InitDetail();
     }
 
     public virtual void InitDetail()
     {
-
+        
     }
 
     public void Launch(Vector2 dir, float power)
@@ -43,7 +40,7 @@ public class Brick : MonoBehaviour
 
         dir = dir.normalized;
 
-        _rigidbody.AddForce(dir * power, ForceMode.Impulse);
+        rigidbody.AddForce(dir * power, ForceMode.Impulse);
     }
 
     protected virtual void OnTriggerEnter(Collider other)

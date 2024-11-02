@@ -18,7 +18,7 @@ public class BoomBrick : Brick
         {
             var brick = col.GetComponentInParent<Brick>();
 
-            brick.Rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
+            brick.rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
         }
     }
 }

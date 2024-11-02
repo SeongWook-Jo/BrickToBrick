@@ -25,7 +25,14 @@ public class PlayerController : MonoBehaviour
 
     protected Vector3 curTargetPos = Vector3.zero;
 
+    protected StageManager _stageManager;
+
     public State curState = State.Idle;
+
+    public void Init(StageManager manager)
+    {
+        _stageManager = manager;
+    }
 
     void Update()
     {
@@ -82,11 +89,7 @@ public class PlayerController : MonoBehaviour
                     float tempGaugePower = powerGauge.GetCurGauge();
                     Vector3 targetDir = targetArrow.CurDir;
 
-                    //브릭 생성 또는 Pool에서 가져오기
-                    GameObject brickObj = PoolManager.Instance.Get(curBrickPrefab, transform.position);
-
-                    //던지기
-                    Brick tempBrick = brickObj.GetComponent<Brick>();
+                    Brick tempBrick = GetNewBrick();
                     tempBrick.Init();
                     tempBrick.Launch(targetDir, firePower * tempGaugePower);
 
@@ -96,4 +99,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    protected virtual Brick GetNewBrick()
+    {
+        var newBrick = _stageManager.GetPlayerBrick();
+
+        return Instantiate(newBrick, transform);
+    }
 }

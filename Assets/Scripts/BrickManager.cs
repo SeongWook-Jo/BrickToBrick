@@ -14,8 +14,6 @@ public class BrickManager : Singleton<BrickManager>
 
     public Brick GetNewNormalBrick()
     {
-        var newBrick = bricks[Random.Range(0, bricks.Length)];
-
-        return Instantiate(newBrick);
+        return bricks[Random.Range(0, bricks.Length)];
     }
 }

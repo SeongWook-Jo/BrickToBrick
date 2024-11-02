@@ -38,7 +38,7 @@ public class BlackholeBrick : Brick
 
             dir.Normalize();
 
-            brick.Rigidbody.AddForce(dir * pullForce);
+            brick.rigidbody.AddForce(dir * pullForce);
         }
     }
 }
