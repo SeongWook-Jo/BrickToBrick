@@ -14,7 +14,7 @@ public class BrickManager : Singleton<BrickManager>
         specialBricks = Resources.LoadAll<Brick>("Prefabs/SpecialBricks");
     }
 
-    public Brick GetBrick()
+    public (Brick, int) GetBrick()
     {
         var random = Random.Range(0, 100);
 
@@ -24,13 +24,13 @@ public class BrickManager : Singleton<BrickManager>
             return GetNormalBrick();
     }
 
-    public Brick GetSpecialBrick()
+    public (Brick, int) GetSpecialBrick()
     {
-        return specialBricks[Random.Range(0, specialBricks.Length)];
+        return (specialBricks[Random.Range(0, specialBricks.Length)], 0);
     }
 
-    public Brick GetNormalBrick()
+    public (Brick, int) GetNormalBrick()
     {
-        return bricks[Random.Range(0, bricks.Length)];
+        return (bricks[Random.Range(0, bricks.Length)], Random.Range(0, Brick.RandomColors.Length));
     }
 }

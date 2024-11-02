@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    public readonly Color[] RandomColors = new Color[] { Color.blue, Color.red, Color.yellow };
+    public static readonly Color[] RandomColors = new Color[] { Color.blue, Color.red, Color.yellow };
 
     public enum BrickType
     {
@@ -23,9 +23,9 @@ public class Brick : MonoBehaviour
 
     public Rigidbody rigidbody;
 
-    protected Renderer renderer;
-
     public float iconScaleFactor;
+
+    protected Renderer renderer;
 
     public void Init()
     {
@@ -35,14 +35,22 @@ public class Brick : MonoBehaviour
 
         if (Type == BrickType.Normal)
         {
-            var randomIdx = Random.Range(0, RandomColors.Length);
-
-            var randomColor = RandomColors[randomIdx];
-
-            renderer.materials[0].SetColor("_Color", randomColor);
+            transform.GetChild(0).AddComponent<BrickCollision>().Init(this);
+        }
+        else
+        {
+            gameObject.AddComponent<BrickCollision>().Init(this);
         }
 
         InitDetail();
+    }
+
+    public void SetColor(int colorIdx)
+    {
+        if (Type != BrickType.Normal)
+            return;
+
+        renderer.materials[0].SetColor("_Color", RandomColors[colorIdx]);
     }
 
     public virtual void InitDetail()
@@ -59,20 +67,20 @@ public class Brick : MonoBehaviour
         rigidbody.AddForce(dir * power, ForceMode.Impulse);
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    public void OnCollision(Collision collision)
     {
-        OnTrigger();
-    }
+        if (Type == BrickType.Boom)
+        {
 
-    protected void OnTrigger()
-    {
+        }
+
         if (IsLaunched == false)
             return;
 
-        OnTriggerDetail();
+        OnCollisionDetail();
     }
 
-    protected virtual void OnTriggerDetail()
+    protected virtual void OnCollisionDetail()
     {
 
     }
@@ -84,9 +92,6 @@ public class Brick : MonoBehaviour
 
     public void ChageBrick()
     {
-        if (Type != BrickType.Normal)
-            return;
-
-        
+        IsLaunched = true;
     }
 }

@@ -105,7 +105,6 @@ public class PlayerController : MonoBehaviour
                     }                    
 
                     Brick tempBrick = GetNewBrick();
-                    tempBrick.Init();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
                     throwAnimationController.FinishThrowing();
 
@@ -119,6 +118,12 @@ public class PlayerController : MonoBehaviour
     {
         var newBrick = _stageManager.GetPlayerBrick();
 
-        return Instantiate(newBrick, transform);
+        var brick = Instantiate(newBrick.Item1, transform);
+
+        brick.Init();
+
+        brick.SetColor(newBrick.Item2);
+
+        return brick;
     }
 }

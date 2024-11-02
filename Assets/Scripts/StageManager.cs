@@ -5,8 +5,8 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class StageManager : MonoBehaviour
 {
-    public Queue<Brick> PlayerBricks { get => _playerBricks; }
-    public Queue<Brick> EnemyBricks { get => _enemyBricks; }
+    public Queue<(Brick, int)> PlayerBricks { get => _playerBricks; }
+    public Queue<(Brick, int)> EnemyBricks { get => _enemyBricks; }
 
     private readonly int ShowBrickCount = 5;
 
@@ -15,8 +15,8 @@ public class StageManager : MonoBehaviour
     public PlayerController player;
     public EnemyController enemy;
 
-    private Queue<Brick> _playerBricks;
-    private Queue<Brick> _enemyBricks;
+    private Queue<(Brick, int)> _playerBricks;
+    private Queue<(Brick, int)> _enemyBricks;
 
     private void Awake()
     {
@@ -29,8 +29,8 @@ public class StageManager : MonoBehaviour
 
         _stageUi.Init(this);
 
-        _playerBricks = new Queue<Brick>();
-        _enemyBricks = new Queue<Brick>();
+        _playerBricks = new Queue<(Brick, int)>();
+        _enemyBricks = new Queue<(Brick, int)>();
 
         player.Init(this);
 
@@ -46,7 +46,7 @@ public class StageManager : MonoBehaviour
         _stageUi.RefreshEnemyBrickQueue();
     }
 
-    public Brick GetPlayerBrick()
+    public (Brick, int) GetPlayerBrick()
     {
         var brick = _playerBricks.Dequeue();
 
@@ -57,7 +57,7 @@ public class StageManager : MonoBehaviour
         return brick;
     }
 
-    public Brick GetEnemyBrick()
+    public (Brick, int) GetEnemyBrick()
     {
         var brick = _enemyBricks.Dequeue();
 

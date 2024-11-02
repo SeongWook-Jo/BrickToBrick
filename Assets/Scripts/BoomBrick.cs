@@ -7,37 +7,38 @@ public class BoomBrick : Brick
 {
     public override BrickType Type { get => BrickType.Boom; }
 
+    public Texture tex;
+
     public float force;
     public float radius;
 
     private bool _isBoom;
-    public Texture tex;
 
     public override void InitDetail()
     {
         renderer.materials[0].SetTexture("_MainTex", tex);
     }
 
-
-    protected override void OnTriggerDetail()
+    protected override void OnCollisionDetail()
     {
         if (_isBoom)
             return;
 
         var colliders = GetNearbyBrickCollider(radius);
 
+        HashSet<Brick> tempBricks = new HashSet<Brick>();
+
         foreach (var col in colliders)
         {
             var brick = col.GetComponentInParent<Brick>();
 
-            brick.rigidbody.AddExplosionForce(force, transform.position, radius, 3f, ForceMode.Impulse);
+            if (tempBricks.Contains(brick) == false)
+                tempBricks.Add(brick);
         }
 
-        _isBoom = true;
-    }
+        foreach(var brick in tempBricks)
+            brick.rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawSphere(transform.position, radius);
+        _isBoom = true;
     }
 }

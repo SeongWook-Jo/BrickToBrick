@@ -13,5 +13,4 @@ public class RandomBoxBrick : Brick
     {
         renderer.materials[0].SetTexture("_MainTex", tex);
     }
-
 }

@@ -99,7 +99,6 @@ public class EnemyController : PlayerController
                     }
 
                     Brick tempBrick = GetNewBrick();
-                    tempBrick.Init();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
                     throwAnimationController.FinishThrowing();
 
@@ -113,6 +112,12 @@ public class EnemyController : PlayerController
     {
         var newBrick = _stageManager.GetEnemyBrick();
 
-        return Instantiate(newBrick, transform);
+        var brick = Instantiate(newBrick.Item1, transform);
+
+        brick.Init();
+
+        brick.SetColor(newBrick.Item2);
+
+        return brick;
     }
 }
