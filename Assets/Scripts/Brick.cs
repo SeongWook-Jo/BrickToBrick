@@ -23,19 +23,24 @@ public class Brick : MonoBehaviour
 
     public Rigidbody rigidbody;
 
+    protected Renderer renderer;
+
     public float iconScaleFactor;
 
     public void Init()
     {
         IsLaunched = false;
 
-        Renderer renderer = GetComponent<MeshRenderer>();
+        renderer = GetComponent<MeshRenderer>();
 
-        var randomIdx = Random.Range(0, RandomColors.Length);
+        if (Type == BrickType.Normal)
+        {
+            var randomIdx = Random.Range(0, RandomColors.Length);
 
-        var randomColor = RandomColors[randomIdx];
+            var randomColor = RandomColors[randomIdx];
 
-        renderer.materials[0].SetColor("_Color", randomColor);
+            renderer.materials[0].SetColor("_Color", randomColor);
+        }
 
         InitDetail();
     }
