@@ -17,10 +17,11 @@ public class Brick : MonoBehaviour
 
     public virtual BrickType Type { get => BrickType.Normal; }
 
-    public Rigidbody rigidbody;
-
     public bool IsLaunched { get; private set; }
 
+    public Rigidbody rigidbody;
+
+    public float iconScaleFactor;
 
     public void Init()
     {

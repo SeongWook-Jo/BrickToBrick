@@ -17,7 +17,7 @@ public class Singleton <T>: MonoBehaviour where T : MonoBehaviour
 
                 if (instance == null )
                 {
-                    var obj = Resources.Load<T>(typeof(T).Name);
+                    var obj = Resources.Load<T>($"Prefabs/{typeof(T).Name}");
                     var tObj = Instantiate(obj);
                     instance = tObj;
                 }

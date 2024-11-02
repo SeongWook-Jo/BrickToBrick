@@ -33,7 +33,7 @@ public class StageUi : MonoBehaviour
 
             newBrick.rigidbody.isKinematic = true;
 
-            newBrick.transform.localScale = new Vector3(70, 70, 70);
+            newBrick.transform.localScale = Vector3.one * 70f * newBrick.iconScaleFactor;
         }
     }
 
@@ -53,7 +53,7 @@ public class StageUi : MonoBehaviour
 
             newBrick.rigidbody.isKinematic = true;
 
-            newBrick.transform.localScale = new Vector3(70, 70, 70);
+            newBrick.transform.localScale = Vector3.one * 70f * newBrick.iconScaleFactor;
         }
     }
 

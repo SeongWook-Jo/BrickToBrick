@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4035446409362472089}
   - component: {fileID: 8516683418562455293}
   - component: {fileID: 2137066254600215927}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8561286813508977871}
   - component: {fileID: 8478571346246546767}
   - component: {fileID: 5184822391123694195}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Brick1
   m_TagString: Brick
   m_Icon: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 5184822391123694195}
+  iconScaleFactor: 0.7
 --- !u!33 &8561286813508977871
 MeshFilter:
   m_ObjectHideFlags: 0

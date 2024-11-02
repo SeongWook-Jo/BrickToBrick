@@ -38,8 +38,8 @@ public class StageManager : MonoBehaviour
 
         for (int i = 0; i < ShowBrickCount; i++)
         {
-            _playerBricks.Enqueue(BrickManager.Instance.GetNewNormalBrick());
-            _enemyBricks.Enqueue(BrickManager.Instance.GetNewNormalBrick());
+            _playerBricks.Enqueue(BrickManager.Instance.GetBrick());
+            _enemyBricks.Enqueue(BrickManager.Instance.GetBrick());
         }
 
         _stageUi.RefreshPlayerBrickQueue();
@@ -50,7 +50,7 @@ public class StageManager : MonoBehaviour
     {
         var brick = _playerBricks.Dequeue();
 
-        _playerBricks.Enqueue(BrickManager.Instance.GetNewNormalBrick());
+        _playerBricks.Enqueue(BrickManager.Instance.GetBrick());
 
         _stageUi.RefreshPlayerBrickQueue();
 
@@ -61,7 +61,7 @@ public class StageManager : MonoBehaviour
     {
         var brick = _enemyBricks.Dequeue();
 
-        _enemyBricks.Enqueue(BrickManager.Instance.GetNewNormalBrick());
+        _enemyBricks.Enqueue(BrickManager.Instance.GetBrick());
 
         _stageUi.RefreshEnemyBrickQueue();
 
