@@ -58,21 +58,22 @@ public class PlayerController : MonoBehaviour
                     {
                         break;
                     }
-                    
+
+                    targetArrow.gameObject.SetActive(true);
                     curState = State.ArrowTargeting;
                 }
                 break;
             case State.ArrowTargeting:
                 {
-                    //마우스 따라서 화살표 조준하기
-                    curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    curTargetDir = (curTargetPos - transform.position).normalized;
-
                     curState = State.PowerGauge;
                 }
                 break;
             case State.PowerGauge:
                 {
+                    //마우스 따라서 화살표 조준하기
+                    curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    targetArrow.RotateToTargetPos(curTargetPos);
+
                     if (powerGauge.gameObject.activeSelf == false)
                         powerGauge.gameObject.SetActive(true);
 
@@ -85,8 +86,11 @@ public class PlayerController : MonoBehaviour
                                 characterAnimator.SetTrigger("Throw");
                         }
 
-                        curGaugePower = powerGauge.GetCurGauge();                        
+                        curGaugePower = powerGauge.GetCurGauge();
+                        curTargetDir = targetArrow.CurDir;
+
                         powerGauge.gameObject.SetActive(false);
+                        targetArrow.gameObject.SetActive(false);
 
                         curState = State.Fire;
                     }
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
             case State.Fire:
                 {
                     //애니메이션 던지는 동작 맞춰서 날라가기
-                    if(throwAnimationController.IsReadyToThrow == false)
+                    if (throwAnimationController.IsReadyToThrow == false)
                     {
                         break;
                     }                    
