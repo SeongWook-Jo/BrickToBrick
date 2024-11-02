@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class Singleton <T>: MonoBehaviour where T : MonoBehaviour
@@ -13,6 +14,13 @@ public class Singleton <T>: MonoBehaviour where T : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<T>();
+
+                if (instance == null )
+                {
+                    var obj = Resources.Load<T>(typeof(T).Name);
+                    var tObj = Instantiate(obj);
+                    instance = tObj;
+                }
             }
 
             return instance;
