@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BlackholeBrick : Brick
 {
+    public override BrickType Type { get => BrickType.Blackhole; }
+
     public float blackholeTime;
     public float pullForce;
     public float radius;
