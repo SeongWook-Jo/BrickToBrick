@@ -13,7 +13,6 @@ public class Brick : MonoBehaviour
         Boom,
         Blackhole,
         Chnage,
-        RandomBox,
         TangTang,
     }
 
@@ -47,15 +46,25 @@ public class Brick : MonoBehaviour
 
     public void SetColor(int colorIdx)
     {
-        if (Type != BrickType.Normal)
-            return;
-
-        renderer.materials[0].SetColor("_Color", RandomColors[colorIdx]);
+        if (Type == BrickType.Normal)
+        {
+            renderer.materials[0].SetColor("_Color", RandomColors[colorIdx]);
+        }
+        else
+        {
+            if (colorIdx == 1)
+                SetFoceTex(Resources.Load<Texture>("Model/item_texture/item_random"));
+        }
     }
 
     public virtual void InitDetail()
     {
         
+    }
+
+    protected virtual void SetFoceTex(Texture tex)
+    {
+
     }
 
     public void Launch(Vector2 dir, float power)

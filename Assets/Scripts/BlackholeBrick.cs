@@ -15,7 +15,6 @@ public class BlackholeBrick : Brick
 
     private float _currTime;
 
-
     public override void InitDetail()
     {
         renderer.materials[0].SetTexture("_MainTex", tex);
@@ -44,5 +43,10 @@ public class BlackholeBrick : Brick
 
             brick.rigidbody.AddForce(dir * pullForce);
         }
+    }
+
+    protected override void SetFoceTex(Texture tex)
+    {
+        renderer.materials[0].SetTexture("_MainTex", tex);
     }
 }

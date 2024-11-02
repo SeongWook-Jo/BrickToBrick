@@ -26,7 +26,14 @@ public class BrickManager : Singleton<BrickManager>
 
     public (Brick, int) GetSpecialBrick()
     {
-        return (specialBricks[Random.Range(0, specialBricks.Length)], 0);
+        var random = Random.Range(0, 100);
+
+        int isRandomBox = 0;
+
+        if (random < 100 / specialBricks.Length + 1)
+            isRandomBox = 1;
+
+        return (specialBricks[Random.Range(0, specialBricks.Length)], isRandomBox);
     }
 
     public (Brick, int) GetNormalBrick()

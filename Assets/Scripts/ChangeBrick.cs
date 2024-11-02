@@ -58,4 +58,9 @@ public class ChangeBrick : Brick
 
         _isChange = true;
     }
+
+    protected override void SetFoceTex(Texture tex)
+    {
+        renderer.materials[0].SetTexture("_MainTex", tex);
+    }
 }

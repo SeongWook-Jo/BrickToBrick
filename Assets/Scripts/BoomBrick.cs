@@ -41,4 +41,9 @@ public class BoomBrick : Brick
 
         _isBoom = true;
     }
+
+    protected override void SetFoceTex(Texture tex)
+    {
+        renderer.materials[0].SetTexture("_MainTex", tex);
+    }
 }
