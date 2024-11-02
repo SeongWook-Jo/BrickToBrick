@@ -22,6 +22,7 @@ public class Brick : MonoBehaviour
     public bool IsLaunched { get; private set; }
 
     private MeshCollider _meshCollider;
+    private MeshRenderer _meshRenderer;
     private Rigidbody _rigidbody;
     private MeshFilter _meshFilter;
 
