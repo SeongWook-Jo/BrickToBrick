@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
+    public readonly Color[] RandomColors = new Color[] { Color.blue, Color.red, Color.yellow };
+
     public enum BrickType
     {
         Normal,
@@ -26,6 +28,14 @@ public class Brick : MonoBehaviour
     public void Init()
     {
         IsLaunched = false;
+
+        Renderer renderer = GetComponent<MeshRenderer>();
+
+        var randomIdx = Random.Range(0, RandomColors.Length);
+
+        var randomColor = RandomColors[randomIdx];
+
+        renderer.materials[0].SetColor("_Color", randomColor);
 
         InitDetail();
     }
