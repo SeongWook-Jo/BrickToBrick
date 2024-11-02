@@ -18,6 +18,9 @@ public class EnemyController : PlayerController
 
     void Update()
     {
+        if (_stageManager.IsEndGame)
+            return;
+
         switch (curState)
         {
             case State.Init:
@@ -101,6 +104,8 @@ public class EnemyController : PlayerController
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
                     throwAnimationController.FinishThrowing();
+
+                    _stageManager.ShowBrickList.Add(tempBrick);
 
                     curState = State.Init;
                 }

@@ -10,10 +10,20 @@ public class StageManager : MonoBehaviour
 
     private readonly int ShowBrickCount = 5;
 
-    private StageUi _stageUi;
+    public bool IsEndGame { get; private set; }
 
     public PlayerController player;
+
     public EnemyController enemy;
+
+    public List<Brick> ShowBrickList { get; private set; }
+
+    public float totalPlayingTime;
+
+
+    private float _currTime;
+
+    private StageUi _stageUi;
 
     private Queue<(Brick, int)> _playerBricks;
     private Queue<(Brick, int)> _enemyBricks;
@@ -25,6 +35,12 @@ public class StageManager : MonoBehaviour
 
     private void Init()
     {
+        IsEndGame = false;
+
+        _currTime = 0;
+
+        ShowBrickList = new List<Brick>();
+
         _stageUi = FindObjectOfType<StageUi>();
 
         _stageUi.Init(this);
@@ -44,6 +60,66 @@ public class StageManager : MonoBehaviour
 
         _stageUi.RefreshPlayerBrickQueue();
         _stageUi.RefreshEnemyBrickQueue();
+
+        StartCoroutine(CoSetPlayingTimeProgress());
+    }
+
+    private IEnumerator CoSetPlayingTimeProgress()
+    {
+        var delay = new WaitForSeconds(1.0f);
+
+        while(_currTime < totalPlayingTime)
+        {
+            _stageUi.SetPlayingTimeProgress(_currTime, totalPlayingTime);
+
+            yield return delay;
+
+            _currTime += 1;
+        }
+
+        _stageUi.SetPlayingTimeProgress(_currTime, totalPlayingTime);
+
+        EndGame();
+    }
+
+    private void EndGame()
+    {
+        IsEndGame = true;
+
+        StartCoroutine(CoEndGame());
+    }
+
+    private IEnumerator CoEndGame()
+    {
+        var delay = new WaitForSeconds(0.4f);
+
+        foreach (var brick in ShowBrickList)
+            brick.rigidbody.isKinematic = true;
+
+        var myAreaBrickCnt = 0;
+        var enemyAreaBrickCnt = 0;
+
+        _stageUi.ShowBrickCnt();
+
+        var cam = Camera.main;
+
+        for (int i = ShowBrickList.Count - 1; i >= 0; i--)
+        {
+            var brick = ShowBrickList[i];
+
+            brick.gameObject.SetActive(false);
+
+            var viewPortPoint = cam.WorldToViewportPoint(brick.transform.position);
+
+            if (viewPortPoint.x < 0.5f)
+                myAreaBrickCnt++;
+            else
+                enemyAreaBrickCnt++;
+
+            _stageUi.SetBrickCnt(myAreaBrickCnt, enemyAreaBrickCnt);
+
+            yield return delay;
+        }
     }
 
     public (Brick, int) GetPlayerBrick()

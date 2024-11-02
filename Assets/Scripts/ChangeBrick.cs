@@ -11,7 +11,7 @@ public class ChangeBrick : Brick
 
     public float radius;
 
-    public bool _isChange;
+    private bool _isChange;
 
     public override void InitDetail()
     {

@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using UnityEngine.UI;
+
+using TMPro;
 
 public class StageUi : MonoBehaviour
 {
     public GameObject brickIconPref;
+
+    public TextMeshProUGUI progressTime;
+    public TextMeshProUGUI myAreaBrickCnt;
+    public TextMeshProUGUI enemyAreaBrickCnt;
 
     public GridLayoutGroup playerBrickGrid;
     public GridLayoutGroup enemyBrickGrid;
@@ -15,6 +23,9 @@ public class StageUi : MonoBehaviour
     public void Init(StageManager manager)
     {
         _manager = manager;
+
+        myAreaBrickCnt.gameObject.SetActive(false);
+        enemyAreaBrickCnt.gameObject.SetActive(false);
     }
 
     public void RefreshPlayerBrickQueue()
@@ -73,5 +84,30 @@ public class StageUi : MonoBehaviour
 
             Destroy(child.gameObject);
         }
+    }
+
+    public void SetPlayingTimeProgress(float currTime, float totalTime)
+    {
+        var reaminTime = (int)(totalTime - currTime);
+
+        if (reaminTime < 10)
+            progressTime.color = Color.red;
+
+        progressTime.text = $"{reaminTime}";
+    }
+
+    public void ShowBrickCnt()
+    {
+        myAreaBrickCnt.gameObject.SetActive(true);
+        enemyAreaBrickCnt.gameObject.SetActive(true);
+
+        myAreaBrickCnt.text = "0";
+        enemyAreaBrickCnt.text = "0";
+    }
+
+    public void SetBrickCnt(int myAreaCnt, int enemyAreaCnt)
+    {
+        myAreaBrickCnt.text = myAreaCnt.ToString();
+        enemyAreaBrickCnt.text = enemyAreaCnt.ToString();
     }
 }

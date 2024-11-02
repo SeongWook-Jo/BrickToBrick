@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (_stageManager.IsEndGame)
+            return;
+
         switch (curState)
         {
             case State.Init:
@@ -107,6 +110,8 @@ public class PlayerController : MonoBehaviour
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
                     throwAnimationController.FinishThrowing();
+
+                    _stageManager.ShowBrickList.Add(tempBrick);
 
                     curState = State.Init;
                 }
