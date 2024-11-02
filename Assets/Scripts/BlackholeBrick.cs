@@ -7,14 +7,18 @@ public class BlackholeBrick : Brick
 {
     public override BrickType Type { get => BrickType.Blackhole; }
 
+    public Texture tex;
+
     public float blackholeTime;
     public float pullForce;
     public float radius;
 
     private float _currTime;
 
+
     public override void InitDetail()
     {
+        renderer.materials[0].SetTexture("_MainTex", tex);
         _currTime = 0;
     }
 

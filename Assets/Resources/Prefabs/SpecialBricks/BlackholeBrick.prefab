@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8074768678721039897}
   iconScaleFactor: 0.7
+  tex: {fileID: 2800000, guid: 93071581e7b9050479403c5700bb619d, type: 3}
   blackholeTime: 5
   pullForce: 5
   radius: 5
@@ -81,7 +82,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8ed0733911233f74f8d2deb8c867671e, type: 2}
+  - {fileID: 2100000, guid: bb270d3d5c4873943aba336a38b08916, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

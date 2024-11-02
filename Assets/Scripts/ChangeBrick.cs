@@ -9,6 +9,13 @@ public class ChangeBrick : Brick
 
     public float radius;
 
+    public Texture tex;
+
+    public override void InitDetail()
+    {
+        renderer.materials[0].SetTexture("_MainTex", tex);
+    }
+
     protected override void OnTriggerDetail()
     {
         var colliders = GetNearbyBrickCollider(radius);

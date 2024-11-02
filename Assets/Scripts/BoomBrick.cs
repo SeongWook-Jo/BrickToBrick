@@ -11,6 +11,13 @@ public class BoomBrick : Brick
     public float radius;
 
     private bool _isBoom;
+    public Texture tex;
+
+    public override void InitDetail()
+    {
+        renderer.materials[0].SetTexture("_MainTex", tex);
+    }
+
 
     protected override void OnTriggerDetail()
     {
