@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour
         Fire                //발사        
     }
 
-    [SerializeField]
-    protected GameObject curBrickPrefab;
+    [SerializeField] protected GameObject curBrickPrefab;
+
+    [SerializeField] protected Animator characterAnimator;
+    [SerializeField] protected ThrowAnimationFrameController throwAnimationController;
 
     [SerializeField] protected TargetArrow targetArrow;       //방향 화살표
     [SerializeField] protected Gauge powerGauge;              //파워 게이지
@@ -28,6 +30,9 @@ public class PlayerController : MonoBehaviour
     protected StageManager _stageManager;
 
     public State curState = State.Idle;
+
+    protected float curGaugePower;
+    protected Vector3 curTargetDir;
 
     public void Init(StageManager manager)
     {
@@ -80,18 +85,31 @@ public class PlayerController : MonoBehaviour
                     //클릭하면 발사
                     if (Input.GetMouseButtonDown(0))
                     {
+                        if (characterAnimator != null)
+                        {
+                            if (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Throw") == false)
+                                characterAnimator.SetTrigger("Throw");
+                        }
+
+                        curGaugePower = powerGauge.GetCurGauge();
+                        curTargetDir = targetArrow.CurDir;
+
                         curState = State.Fire;
                     }
                 }
                 break;
             case State.Fire:
                 {
-                    float tempGaugePower = powerGauge.GetCurGauge();
-                    Vector3 targetDir = targetArrow.CurDir;
+                    //애니메이션 던지는 동작 맞춰서 날라가기
+                    if(throwAnimationController.IsReadyToThrow == false)
+                    {
+                        break;
+                    }                    
 
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Init();
-                    tempBrick.Launch(targetDir, firePower * tempGaugePower);
+                    tempBrick.Launch(curTargetDir, firePower * curGaugePower);
+                    throwAnimationController.FinishThrowing();
 
                     curState = State.Init;
                 }

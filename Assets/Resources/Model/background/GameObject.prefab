@@ -1231,7 +1231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863015795089399673, guid: a87ba20a0df38b641a69d24e50938867, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.92
+      value: 6.53
       objectReference: {fileID: 0}
     - target: {fileID: 7863015795089399673, guid: a87ba20a0df38b641a69d24e50938867, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1287,8 +1287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67301b07b0da24a47b35f607f12a6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLocalPos: {x: 14.49, y: 3.5300736, z: 2.92}
-  endLocalPos: {x: -13.08, y: 3.5300736, z: 2.92}
+  startLocalPos: {x: 14.49, y: 3.5300736, z: 6.53}
+  endLocalPos: {x: -13.08, y: 3.5300736, z: 6.53}
   totalMoveTime: 37
 --- !u!4 &2508981530102421087 stripped
 Transform:
@@ -1325,7 +1325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.52
+      value: 9.89
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1393,8 +1393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67301b07b0da24a47b35f607f12a6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLocalPos: {x: 15.24, y: 3.6600738, z: -0.52}
-  endLocalPos: {x: -14.81, y: 3.6600738, z: -0.52}
+  startLocalPos: {x: 15.24, y: 3.6600738, z: 9.89}
+  endLocalPos: {x: -14.81, y: 3.6600738, z: 9.89}
   totalMoveTime: 54
 --- !u!4 &1659047825342379242 stripped
 Transform:
@@ -1435,7 +1435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863015795089399673, guid: a87ba20a0df38b641a69d24e50938867, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.92
+      value: 7.34
       objectReference: {fileID: 0}
     - target: {fileID: 7863015795089399673, guid: a87ba20a0df38b641a69d24e50938867, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1496,8 +1496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67301b07b0da24a47b35f607f12a6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLocalPos: {x: 15.148699, y: 4.1700735, z: 2.92}
-  endLocalPos: {x: -13.4, y: 4.1700735, z: 2.92}
+  startLocalPos: {x: 15.148699, y: 4.1700735, z: 7.34}
+  endLocalPos: {x: -13.4, y: 4.1700735, z: 7.34}
   totalMoveTime: 71
 --- !u!1001 &7623910805039221451
 PrefabInstance:
@@ -1517,7 +1517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.7
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1590,8 +1590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67301b07b0da24a47b35f607f12a6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLocalPos: {x: 15.63, y: 6.0200734, z: 0.7}
-  endLocalPos: {x: -15.98, y: 6.0200734, z: 0.7}
+  startLocalPos: {x: 15.63, y: 6.0200734, z: 7.65}
+  endLocalPos: {x: -15.98, y: 6.0200734, z: 7.65}
   totalMoveTime: 44
 --- !u!1001 &8569209077324335109
 PrefabInstance:
@@ -1623,7 +1623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.01
+      value: 9.35
       objectReference: {fileID: 0}
     - target: {fileID: 5224262757563129084, guid: 548bfe4d704d4f04b8de01d0ff42220c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1691,8 +1691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67301b07b0da24a47b35f607f12a6d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLocalPos: {x: 16.33, y: 4.8000736, z: -1.01}
-  endLocalPos: {x: -16.1, y: 4.8000736, z: -1.01}
+  startLocalPos: {x: 16.33, y: 4.8000736, z: 9.35}
+  endLocalPos: {x: -16.1, y: 4.8000736, z: 9.35}
   totalMoveTime: 66
 --- !u!4 &4497896518105306361 stripped
 Transform:

@@ -76,18 +76,31 @@ public class EnemyController : PlayerController
                     float tempCurPowerGauge = powerGauge.GetCurGauge();
                     if (targetPowerGauge - 0.02f <= tempCurPowerGauge && tempCurPowerGauge <= targetPowerGauge + 0.02f)
                     {
+                        if (characterAnimator != null)
+                        {
+                            if (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Throw") == false)
+                                characterAnimator.SetTrigger("Throw");
+                        }
+
+                        curGaugePower = powerGauge.GetCurGauge();
+                        curTargetDir = targetArrow.CurDir;
+
                         curState = State.Fire;
                     }
                 }
                 break;
             case State.Fire:
                 {
-                    float tempGaugePower = powerGauge.GetCurGauge();
-                    Vector3 targetDir = targetArrow.CurDir;
+                    //애니메이션 던지는 동작 맞춰서 날라가기
+                    if (throwAnimationController.IsReadyToThrow == false)
+                    {
+                        break;
+                    }
 
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Init();
-                    tempBrick.Launch(targetDir, firePower * tempGaugePower);
+                    tempBrick.Launch(curTargetDir, firePower * curGaugePower);
+                    throwAnimationController.FinishThrowing();
 
                     curState = State.Init;
                 }
