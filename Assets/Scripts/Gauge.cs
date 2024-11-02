@@ -8,7 +8,7 @@ public class Gauge : MonoBehaviour
 
     //최초 로컬 Y 위치 및 스케일
     float initialLocalScale_Y;
-    float initialLocalScale_Y_Half;
+    float initialLocalScale_Y_x2;
 
     [SerializeField] float curPosY;
     [SerializeField] float curScaleY;
@@ -24,7 +24,7 @@ public class Gauge : MonoBehaviour
     {
         fill = transform.GetChild(1).gameObject;
         initialLocalScale_Y = fill.transform.localScale.y;
-        initialLocalScale_Y_Half = initialLocalScale_Y / 2.0f;
+        initialLocalScale_Y_x2 = initialLocalScale_Y * 2.0f;
     }
 
 
@@ -37,7 +37,7 @@ public class Gauge : MonoBehaviour
             else
                 timer -= Time.deltaTime;
 
-            curPosY = -Mathf.Lerp(0, initialLocalScale_Y_Half, timer / powerUptotalTime);
+            curPosY = -Mathf.Lerp(0, initialLocalScale_Y_x2, timer / powerUptotalTime);
             curScaleY = Mathf.Lerp(initialLocalScale_Y, 0, timer / powerUptotalTime);
 
             fill.transform.localPosition = new Vector3(fill.transform.localPosition.x, curPosY, fill.transform.localPosition.z);
@@ -58,7 +58,7 @@ public class Gauge : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            curPosY = -Mathf.Lerp(initialLocalScale_Y_Half, 0, timer / powerUptotalTime);
+            curPosY = -Mathf.Lerp(initialLocalScale_Y_x2, 0, timer / powerUptotalTime);
             curScaleY = Mathf.Lerp(0, initialLocalScale_Y, timer / powerUptotalTime);
 
             fill.transform.localPosition = new Vector3(fill.transform.localPosition.x, curPosY, fill.transform.localPosition.z);
@@ -75,7 +75,7 @@ public class Gauge : MonoBehaviour
     public float GetCurGauge()
     {
         //0 ~ 1.0
-        float tempCurPowerRatio = (initialLocalScale_Y_Half - Mathf.Abs(curPosY)) / initialLocalScale_Y_Half;
+        float tempCurPowerRatio = (initialLocalScale_Y_x2 - Mathf.Abs(curPosY)) / initialLocalScale_Y_x2;
         return tempCurPowerRatio;
     }
 }
