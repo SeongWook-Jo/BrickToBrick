@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fdaaf4ba334bb479763d7fbe33e807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgm_MasterVolume: 0.5
   audioClips_BGM:
   - {fileID: 8300000, guid: 0dbc820197d1f0e40acee95f33666d7c, type: 3}
-  bgm_MasterVolume: 0.5
-  audioClips_SFX:
-  - {fileID: 8300000, guid: f6b995e6bb6b055419c78f38a444f984, type: 3}
   sfx_MasterVolume: 0.5
+  audioClips_SFX:
+  - {fileID: 8300000, guid: 7798ede9348a3194894df12a47d36144, type: 3}
+  - {fileID: 8300000, guid: c5cf805bd8ec26740b4d9fc70d6b9222, type: 3}
+  - {fileID: 8300000, guid: 82401839fb7625348bce635ced1233e2, type: 3}

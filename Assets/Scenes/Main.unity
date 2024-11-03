@@ -1941,6 +1941,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1358167492}
     m_Modifications:
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7798ede9348a3194894df12a47d36144, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: c5cf805bd8ec26740b4d9fc70d6b9222, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 82401839fb7625348bce635ced1233e2, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3c9b77801d387fb44bd2d1e61dc589b0, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7035b13d4cadd394184155345d4d5773, type: 3}
     - target: {fileID: 3307140632673107737, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
       propertyPath: m_Name
       value: SoundManager
