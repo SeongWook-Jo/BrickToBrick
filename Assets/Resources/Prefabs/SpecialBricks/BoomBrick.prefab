@@ -51,7 +51,7 @@ MonoBehaviour:
   rigidbody: {fileID: 8147276335797983747}
   iconScaleFactor: 0.7
   tex: {fileID: 2800000, guid: 2e78c4263c982b54fa1c5336f6a1c4e9, type: 3}
-  force: 10
+  force: 40
   radius: 5
 --- !u!33 &8430563952632943633
 MeshFilter:

@@ -37,6 +37,10 @@ public class PlayerController : MonoBehaviour
     public void Init(StageManager manager)
     {
         _stageManager = manager;
+
+        powerGauge.Init(manager);
+
+        coolTimeGauge.Init(manager);
     }
 
     void Update()
