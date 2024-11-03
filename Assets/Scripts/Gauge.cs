@@ -20,16 +20,22 @@ public class Gauge : MonoBehaviour
 
     bool isScaleDown = true;
 
-    private void Awake()
+    private StageManager _manager;
+
+    public void Init(StageManager manager)
     {
+        _manager = manager;
+
         fill = transform.GetChild(1).gameObject;
         initialLocalScale_Y = fill.transform.localScale.y;
         initialLocalScale_Y_x2 = initialLocalScale_Y * 2.0f;
     }
 
-
     void Update()
     {
+        if (_manager.IsEndGame)
+            return;
+
         if(isGaugeUpDown == true)
         {
             if (isScaleDown == true)
