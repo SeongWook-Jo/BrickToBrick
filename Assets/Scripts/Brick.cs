@@ -80,6 +80,13 @@ public class Brick : MonoBehaviour
         dir = dir.normalized;
 
         rigidbody.AddForce(dir * power, ForceMode.Impulse);
+
+        LaunchDetail();
+    }
+
+    protected virtual void LaunchDetail()
+    {
+
     }
 
     public void OnCollision(Collision collision)

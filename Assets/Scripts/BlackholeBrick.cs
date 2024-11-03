@@ -49,4 +49,9 @@ public class BlackholeBrick : Brick
     {
         renderer.materials[0].SetTexture("_MainTex", tex);
     }
+
+    protected override void LaunchDetail()
+    {
+        FXManager.Instance.ShowFX(FXManager.FX.BlackHole, transform);
+    }
 }

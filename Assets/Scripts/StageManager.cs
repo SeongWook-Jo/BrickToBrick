@@ -93,6 +93,9 @@ public class StageManager : MonoBehaviour
     {
         var delay = new WaitForSeconds(0.4f);
 
+        //FX다른데 달려 있으면 회수해오기
+        FXManager.Instance.CollectAllFXs();
+
         foreach (var brick in ShowBrickList)
             brick.rigidbody.isKinematic = true;
 

@@ -18,4 +18,10 @@ public class TangTangBrick : Brick
     {
         renderer.materials[0].SetTexture("_MainTex", tex);
     }
+
+
+    protected override void OnCollisionDetail()
+    {
+        FXManager.Instance.ShowFX(FXManager.FX.Boing, transform.position);
+    }
 }
