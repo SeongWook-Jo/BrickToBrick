@@ -50,6 +50,9 @@ public class Brick : MonoBehaviour
 
     public void SetColor(int colorIdx)
     {
+        if (renderer == null)
+            renderer = GetComponent<MeshRenderer>();
+
         if (Type == BrickType.Normal)
         {
             renderer.materials[0].SetColor("_Color", RandomColors[colorIdx]);

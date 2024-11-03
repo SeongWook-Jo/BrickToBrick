@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class StageManager : MonoBehaviour
 {
@@ -90,7 +89,9 @@ public class StageManager : MonoBehaviour
 
     private IEnumerator CoEndGame()
     {
-        var delay = new WaitForSeconds(0.4f);
+        var wantedTime = 3.0f;
+
+        var delay = new WaitForSeconds(wantedTime / ShowBrickList.Count);
 
         //FX다른데 달려 있으면 회수해오기
         FXManager.Instance.CollectAllFXs();
