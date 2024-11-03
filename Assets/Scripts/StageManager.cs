@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour
 
     public EnemyController enemy;
 
+    public BrickManager brickManager;
+
     public List<Brick> ShowBrickList { get; private set; }
 
     public float totalPlayingTime;
@@ -42,6 +44,8 @@ public class StageManager : MonoBehaviour
         _stageUi = FindObjectOfType<StageUi>();
 
         _stageUi.Init(this);
+
+        brickManager.Init();
 
         _playerBricks = new Queue<(Brick, int)>();
         _enemyBricks = new Queue<(Brick, int)>();

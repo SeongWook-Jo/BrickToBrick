@@ -8,7 +8,7 @@ public class BrickManager : Singleton<BrickManager>
     public Brick[] bricks;
     public Brick[] specialBricks;
 
-    private void Awake()
+    public void Init()
     {
         bricks = Resources.LoadAll<Brick>("Prefabs/NormalBricks");
         specialBricks = Resources.LoadAll<Brick>("Prefabs/SpecialBricks");
