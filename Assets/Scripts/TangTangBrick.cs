@@ -26,11 +26,10 @@ public class TangTangBrick : Brick
     protected override void OnCollisionDetail()
     {
         curHitCount += 1;
-        if(curHitCount % hitCountToShowFX == 0)
+        if (curHitCount % hitCountToShowFX == 0)
         {
             FXManager.Instance.ShowFX(FXManager.FX.Boing, transform.position);
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.Boing, false);
         }
-
-        SoundManager.Instance.PlaySFX(SoundManager.SFX.Boing, false);
-    }    
+    }
 }
