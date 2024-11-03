@@ -39,7 +39,8 @@ public class BoomBrick : Brick
                 tempBricks.Add(brick);
         }
 
-        FXManager.Instance.ShowFX(FXManager.FX.Boom, transform.position);
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Explosion_01, false);
+        FXManager.Instance.ShowFX(FXManager.FX.Boom, transform.position);        
 
         foreach(var brick in tempBricks)
             brick.rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);

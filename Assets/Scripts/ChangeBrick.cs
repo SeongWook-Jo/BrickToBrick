@@ -29,6 +29,7 @@ public class ChangeBrick : Brick
 
         var tempBricks = new HashSet<Brick>();
 
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Explosion_02, false);
         FXManager.Instance.ShowFX(FXManager.FX.Change, transform.position);
 
         foreach (var col in colliders)

@@ -13,6 +13,8 @@ public class SoundManager : Singleton<SoundManager>
     public enum SFX
     {
         BrickThrow = 0,
+        Explosion_01,
+        Explosion_02,
     }
 
     [Header("BGM")]
