@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StageUi : MonoBehaviour
 {
@@ -123,7 +124,7 @@ public class StageUi : MonoBehaviour
 
     public void OnClickExit()
     {
-        //TODO GoToLobbyScene
+        SceneManager.LoadScene("Lobby");
     }
 
     public void ShowResult(int myAreaBrickCnt, int enemyAreaBrickCnt)
