@@ -30,5 +30,7 @@ public class TangTangBrick : Brick
         {
             FXManager.Instance.ShowFX(FXManager.FX.Boing, transform.position);
         }
-    }
+
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Boing, false);
+    }    
 }

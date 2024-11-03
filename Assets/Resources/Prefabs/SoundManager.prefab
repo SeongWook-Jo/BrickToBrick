@@ -46,9 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgm_MasterVolume: 0.5
   audioClips_BGM:
-  - {fileID: 8300000, guid: 0dbc820197d1f0e40acee95f33666d7c, type: 3}
+  - {fileID: 8300000, guid: e81f8f1f83f5dec49a2e4123c72881ae, type: 3}
+  - {fileID: 8300000, guid: 5b98a60ae219a3d47b174a6673feb994, type: 3}
   sfx_MasterVolume: 0.5
   audioClips_SFX:
   - {fileID: 8300000, guid: 7798ede9348a3194894df12a47d36144, type: 3}
-  - {fileID: 8300000, guid: c5cf805bd8ec26740b4d9fc70d6b9222, type: 3}
-  - {fileID: 8300000, guid: 82401839fb7625348bce635ced1233e2, type: 3}
+  - {fileID: 8300000, guid: f7c69ca148c3b2342a4e53e1addcd4d1, type: 3}
+  - {fileID: 8300000, guid: 32982b21064b89b4da9f34eb6bfe2d72, type: 3}
+  - {fileID: 8300000, guid: cab5381d91e52a048b7120c23e3b702e, type: 3}
+  - {fileID: 8300000, guid: 187e50ee2a266af46b5f0cfbf3f9a761, type: 3}

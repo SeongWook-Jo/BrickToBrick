@@ -7,14 +7,17 @@ public class SoundManager : Singleton<SoundManager>
     //사운드 추가할때 명칭 넣어줘야함
     public enum BGM
     {
-       BattleLoop = 0,
+       Looby = 0,
+       Main,
     }
 
     public enum SFX
     {
         BrickThrow = 0,
-        Explosion_01,
-        Explosion_02,
+        Boom,
+        ChangeBoom,
+        BlackHole,
+        Boing,
     }
 
     [Header("BGM")]
@@ -35,8 +38,7 @@ public class SoundManager : Singleton<SoundManager>
 
     private void Awake()
     {
-        Init_Channels();
-        PlayBGM(BGM.BattleLoop, true);
+        Init_Channels();        
     }
 
     public void Init_Channels()

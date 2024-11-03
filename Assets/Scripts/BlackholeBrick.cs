@@ -50,8 +50,26 @@ public class BlackholeBrick : Brick
         renderer.materials[0].SetTexture("_MainTex", tex);
     }
 
+
+    AudioSource blackHoleAudio = null;
     protected override void LaunchDetail()
     {
         FXManager.Instance.ShowFX(FXManager.FX.BlackHole, transform);
+        blackHoleAudio = SoundManager.Instance.PlaySFX(SoundManager.SFX.BlackHole, true);
+        if(blackHoleAudio != null)
+        {
+            Invoke("StopAudioSound", blackholeTime);
+        }
+    }
+
+    private void OnDisable()
+    {
+        StopAudioSound();
+    }
+
+    void StopAudioSound()
+    {
+        if (blackHoleAudio != null)
+            blackHoleAudio.Stop();
     }
 }

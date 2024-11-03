@@ -15,6 +15,7 @@ public class LobbyUi : MonoBehaviour
     private void Awake()
     {
         Init();
+        SoundManager.Instance.PlayBGM(SoundManager.BGM.Looby, true);
     }
 
     private void Init()

@@ -31,6 +31,7 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         Init();
+        SoundManager.Instance.PlayBGM(SoundManager.BGM.Main, true);
     }
 
     private void Init()

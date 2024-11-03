@@ -39,7 +39,7 @@ public class BoomBrick : Brick
                 tempBricks.Add(brick);
         }
 
-        SoundManager.Instance.PlaySFX(SoundManager.SFX.Explosion_01, false);
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Boom, false);
         FXManager.Instance.ShowFX(FXManager.FX.Boom, transform.position);        
 
         foreach(var brick in tempBricks)
