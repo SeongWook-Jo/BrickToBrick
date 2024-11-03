@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.09548099, y: -0.08675454, z: -0.008353508, w: 0.99160844}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,7 +52,6 @@ MonoBehaviour:
   iconScaleFactor: 0.7
   tex: {fileID: 2800000, guid: f57b5c1a8adcb4442bb04770dc159f44, type: 3}
   radius: 5
-  _isChange: 0
 --- !u!33 &2711869757137589670
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -20,8 +20,15 @@ public class TangTangBrick : Brick
     }
 
 
+
+    int hitCountToShowFX = 3;
+    int curHitCount = 0;
     protected override void OnCollisionDetail()
     {
-        FXManager.Instance.ShowFX(FXManager.FX.Boing, transform.position);
+        curHitCount += 1;
+        if(curHitCount % hitCountToShowFX == 0)
+        {
+            FXManager.Instance.ShowFX(FXManager.FX.Boing, transform.position);
+        }
     }
 }

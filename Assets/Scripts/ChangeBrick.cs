@@ -29,6 +29,8 @@ public class ChangeBrick : Brick
 
         var tempBricks = new HashSet<Brick>();
 
+        FXManager.Instance.ShowFX(FXManager.FX.Change, transform.position);
+
         foreach (var col in colliders)
         {
             var brick = col.GetComponentInParent<Brick>();

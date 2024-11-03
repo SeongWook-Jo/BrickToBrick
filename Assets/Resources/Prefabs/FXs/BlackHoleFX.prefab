@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deActivateTime_Sec: 5
-  scaleDownOnDeActivation: 1
-  scaleDownTime: 1
+  scaleDownOnDeActivation: 0
+  scaleDownTime: 0.5
 --- !u!1001 &1535795829807943396
 PrefabInstance:
   m_ObjectHideFlags: 0

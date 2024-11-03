@@ -171,7 +171,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HighColor_Power: 0.6
-    - _HighIntensity: 5.2
+    - _HighIntensity: 1.5
     - _Inverse_MatcapMask: 0
     - _Inverse_Z_Axis_BLD: 1
     - _Is_BLD: 0
@@ -218,7 +218,7 @@ Material:
     - _OutlineSize: 10
     - _Outline_Width: 0
     - _Parallax: 0.02
-    - _RampLevels: 13
+    - _RampLevels: 2
     - _RimAlpha: 0
     - _RimDropOff: 0
     - _RimLight: 0

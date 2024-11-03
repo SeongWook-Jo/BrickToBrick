@@ -9,6 +9,7 @@ public class FXManager : Singleton<FXManager>
         Boing = 0,
         Boom,
         BlackHole,
+        Change,
     }
 
     [SerializeField]

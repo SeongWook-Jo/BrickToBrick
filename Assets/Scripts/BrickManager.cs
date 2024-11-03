@@ -18,7 +18,7 @@ public class BrickManager : Singleton<BrickManager>
     {
         var random = Random.Range(0, 100);
 
-        if (random < 20)
+        if (random < 30)
             return GetSpecialBrick();
         else
             return GetNormalBrick();

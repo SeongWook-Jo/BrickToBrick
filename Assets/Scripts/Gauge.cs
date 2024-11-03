@@ -22,6 +22,8 @@ public class Gauge : MonoBehaviour
 
     private StageManager _manager;
 
+    public float speedMultiplier = 1;
+
     public void Init(StageManager manager)
     {
         _manager = manager;
@@ -39,9 +41,9 @@ public class Gauge : MonoBehaviour
         if(isGaugeUpDown == true)
         {
             if (isScaleDown == true)
-                timer += Time.deltaTime;
+                timer += Time.deltaTime * speedMultiplier;
             else
-                timer -= Time.deltaTime;
+                timer -= Time.deltaTime * speedMultiplier;
 
             curPosY = -Mathf.Lerp(0, initialLocalScale_Y_x2, timer / powerUptotalTime);
             curScaleY = Mathf.Lerp(initialLocalScale_Y, 0, timer / powerUptotalTime);
@@ -62,7 +64,7 @@ public class Gauge : MonoBehaviour
         }
         else
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * speedMultiplier;
 
             curPosY = -Mathf.Lerp(initialLocalScale_Y_x2, 0, timer / powerUptotalTime);
             curScaleY = Mathf.Lerp(0, initialLocalScale_Y, timer / powerUptotalTime);

@@ -20,7 +20,6 @@ public class StageManager : MonoBehaviour
 
     public float totalPlayingTime;
 
-
     private float _currTime;
 
     private StageUi _stageUi;
@@ -147,5 +146,12 @@ public class StageManager : MonoBehaviour
         _stageUi.RefreshEnemyBrickQueue();
 
         return brick;
+    }
+
+    //Ω√¿€ = 0,   ≥° = 1
+    public float GetRemainTimeRatio()
+    {
+        float tempRatio = _currTime / totalPlayingTime;
+        return tempRatio;
     }
 }

@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected float fireCoolTime;
     [SerializeField] protected float firePower;
 
+    [SerializeField] protected float additionalSpeedMax;
+    protected float speedMultiplier = 1f;
+
     protected Vector3 curTargetPos = Vector3.zero;
 
     protected StageManager _stageManager;
@@ -47,6 +50,12 @@ public class PlayerController : MonoBehaviour
     {
         if (_stageManager.IsEndGame)
             return;
+
+        //스테이지 시간에 따라 가속도 주기 
+        //플레이어는 일단 1로 고정
+        speedMultiplier = 1 + (_stageManager.GetRemainTimeRatio() * additionalSpeedMax);
+        powerGauge.speedMultiplier = speedMultiplier;
+        coolTimeGauge.speedMultiplier = speedMultiplier;
 
         switch (curState)
         {
@@ -89,8 +98,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (characterAnimator != null)
                         {
-                            if (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Throw") == false)
-                                characterAnimator.SetTrigger("Throw");
+                            characterAnimator.SetTrigger("Throw");
                         }
 
                         curGaugePower = powerGauge.GetCurGauge();

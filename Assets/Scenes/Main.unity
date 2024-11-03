@@ -1169,21 +1169,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 76548968555206609, guid: c008aeedb308b434a8a223a616166a60, type: 3}
-      propertyPath: totalMoveTime
-      value: 56
-      objectReference: {fileID: 0}
-    - target: {fileID: 127424419836998254, guid: c008aeedb308b434a8a223a616166a60, type: 3}
-      propertyPath: totalMoveTime
-      value: 53
-      objectReference: {fileID: 0}
     - target: {fileID: 1001632987130957745, guid: c008aeedb308b434a8a223a616166a60, type: 3}
       propertyPath: m_Name
       value: GameObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003172657435454613, guid: c008aeedb308b434a8a223a616166a60, type: 3}
-      propertyPath: totalMoveTime
-      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 2297546258244588387, guid: c008aeedb308b434a8a223a616166a60, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1224,14 +1212,6 @@ PrefabInstance:
     - target: {fileID: 2297546258244588387, guid: c008aeedb308b434a8a223a616166a60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498791364810481912, guid: c008aeedb308b434a8a223a616166a60, type: 3}
-      propertyPath: totalMoveTime
-      value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 6282504924040383116, guid: c008aeedb308b434a8a223a616166a60, type: 3}
-      propertyPath: totalMoveTime
-      value: 55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1781,6 +1761,7 @@ MonoBehaviour:
   powerUptotalTime: 1
   timer: 0
   isGaugeUpDown: 1
+  speedMultiplier: 1
 --- !u!1 &825638101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1796,7 @@ MonoBehaviour:
   powerUptotalTime: 1
   timer: 0
   isGaugeUpDown: 1
+  speedMultiplier: 1
 --- !u!4 &825638103
 Transform:
   m_ObjectHideFlags: 0
@@ -2260,15 +2242,14 @@ MonoBehaviour:
   targetArrow: {fileID: 1654916459}
   powerGauge: {fileID: 802713775}
   coolTimeGauge: {fileID: 1762934695}
-  fireCoolTime: 1
-  firePower: 20
+  fireCoolTime: 0.4
+  firePower: 25
+  additionalSpeedMax: 2.5
   curState: 0
-  arrowTargetingDelay_Max: 4
-  arrowTargetingDelay_Min: 3
-  remainArrowTargetingDelay: 0
+  arrowTargetingDelay_Max: 1.25
+  arrowTargetingDelay_Min: 0.5
   powerGaugeMin: 0.5
   powerGaugeMax: 1
-  targetPowerGauge: 0
 --- !u!1 &1278789998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,6 +2508,7 @@ MonoBehaviour:
   powerUptotalTime: 1
   timer: 0
   isGaugeUpDown: 0
+  speedMultiplier: 1
 --- !u!1 &1358167491
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,8 +2640,9 @@ MonoBehaviour:
   targetArrow: {fileID: 1874634279}
   powerGauge: {fileID: 825638102}
   coolTimeGauge: {fileID: 1339924197}
-  fireCoolTime: 1
-  firePower: 20
+  fireCoolTime: 0.35
+  firePower: 25
+  additionalSpeedMax: 0
   curState: 0
 --- !u!1 &1539471497
 GameObject:
@@ -3389,6 +3372,7 @@ MonoBehaviour:
   powerUptotalTime: 1
   timer: 0
   isGaugeUpDown: 0
+  speedMultiplier: 1
 --- !u!1 &1778718360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,7 +3723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1501025003}
   enemy: {fileID: 1227424868}
-  totalPlayingTime: 20
+  totalPlayingTime: 30
 --- !u!4 &1926689895
 Transform:
   m_ObjectHideFlags: 0
@@ -3892,6 +3876,7 @@ MonoBehaviour:
   - {fileID: 2025490307447987895, guid: 5f91c3ca5af12f440a213cfacfbf2e17, type: 3}
   - {fileID: 5020082938465616206, guid: 568ba7322580269418c9348921fb81e9, type: 3}
   - {fileID: 5957735574486618939, guid: 26165f7a06ed00743bfba9152bcfef56, type: 3}
+  - {fileID: 3445871319832876924, guid: de7e31385f41b2d489a9fae1806149c1, type: 3}
 --- !u!1 &2111539996
 GameObject:
   m_ObjectHideFlags: 0
