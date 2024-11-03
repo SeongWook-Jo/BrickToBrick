@@ -26,8 +26,12 @@ public class Brick : MonoBehaviour
 
     protected Renderer renderer;
 
-    public void Init()
+    protected StageManager _stageManager;
+
+    public void Init(StageManager manager)
     {
+        _stageManager = manager;
+
         IsLaunched = false;
 
         renderer = GetComponent<MeshRenderer>();

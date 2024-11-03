@@ -119,7 +119,7 @@ public class EnemyController : PlayerController
 
         var brick = Instantiate(newBrick.Item1, transform);
 
-        brick.Init();
+        brick.Init(_stageManager);
 
         brick.SetColor(newBrick.Item2);
 

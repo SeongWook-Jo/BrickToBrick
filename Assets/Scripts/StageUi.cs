@@ -46,7 +46,7 @@ public class StageUi : MonoBehaviour
 
             newBrick.transform.localScale = Vector3.one * 70f * newBrick.iconScaleFactor;
 
-            newBrick.Init();
+            newBrick.Init(_manager);
 
             newBrick.SetColor(brick.Item2);
         }
@@ -70,7 +70,7 @@ public class StageUi : MonoBehaviour
 
             newBrick.transform.localScale = Vector3.one * 70f * newBrick.iconScaleFactor;
 
-            newBrick.Init();
+            newBrick.Init(_manager);
 
             newBrick.SetColor(brick.Item2);
         }

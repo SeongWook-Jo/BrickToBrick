@@ -44,13 +44,19 @@ public class ChangeBrick : Brick
         {
             var pos = brick.transform.position;
 
+            _stageManager.ShowBrickList.Remove(brick);
+
+            Destroy(brick.gameObject);
+
             var newBrick = BrickManager.Instance.GetNormalBrick();
 
             var instance = Instantiate(newBrick.Item1);
 
+            _stageManager.ShowBrickList.Add(instance);
+
             instance.transform.position = pos;
 
-            instance.Init();
+            instance.Init(_stageManager);
 
             instance.SetColor(newBrick.Item2);
 
