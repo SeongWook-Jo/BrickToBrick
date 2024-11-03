@@ -32,6 +32,9 @@ public class BoomBrick : Brick
         {
             var brick = col.GetComponentInParent<Brick>();
 
+            if (brick == this)
+                continue;
+
             if (tempBricks.Contains(brick) == false)
                 tempBricks.Add(brick);
         }

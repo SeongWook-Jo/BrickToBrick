@@ -33,6 +33,9 @@ public class ChangeBrick : Brick
         {
             var brick = col.GetComponentInParent<Brick>();
 
+            if (brick.Type != BrickType.Normal)
+                continue;
+
             if (tempBricks.Contains(brick) == false)
                 tempBricks.Add(brick);
         }
@@ -40,8 +43,6 @@ public class ChangeBrick : Brick
         foreach(var brick in tempBricks)
         {
             var pos = brick.transform.position;
-
-            Destroy(brick.gameObject);
 
             var newBrick = BrickManager.Instance.GetNormalBrick();
 
