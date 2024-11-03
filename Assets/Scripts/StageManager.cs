@@ -120,6 +120,8 @@ public class StageManager : MonoBehaviour
 
             yield return delay;
         }
+
+        _stageUi.ShowResult(myAreaBrickCnt, enemyAreaBrickCnt);
     }
 
     public (Brick, int) GetPlayerBrick()

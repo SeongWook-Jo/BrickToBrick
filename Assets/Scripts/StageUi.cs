@@ -18,6 +18,11 @@ public class StageUi : MonoBehaviour
     public GridLayoutGroup playerBrickGrid;
     public GridLayoutGroup enemyBrickGrid;
 
+    public Image winImg;
+    public Image loseImg;
+    public Image drawImg;
+    public Image exitImg;
+
     private StageManager _manager;
 
     public void Init(StageManager manager)
@@ -26,6 +31,11 @@ public class StageUi : MonoBehaviour
 
         myAreaBrickCnt.gameObject.SetActive(false);
         enemyAreaBrickCnt.gameObject.SetActive(false);
+
+        winImg.gameObject.SetActive(false);
+        loseImg.gameObject.SetActive(false);
+        drawImg.gameObject.SetActive(false);
+        exitImg.gameObject.SetActive(false);
     }
 
     public void RefreshPlayerBrickQueue()
@@ -109,5 +119,22 @@ public class StageUi : MonoBehaviour
     {
         myAreaBrickCnt.text = myAreaCnt.ToString();
         enemyAreaBrickCnt.text = enemyAreaCnt.ToString();
+    }
+
+    public void OnClickExit()
+    {
+        //TODO GoToLobbyScene
+    }
+
+    public void ShowResult(int myAreaBrickCnt, int enemyAreaBrickCnt)
+    {
+        exitImg.gameObject.SetActive(true);
+
+        if (myAreaBrickCnt < enemyAreaBrickCnt)
+            winImg.gameObject.SetActive(true);
+        else if (myAreaBrickCnt > enemyAreaBrickCnt)
+            loseImg.gameObject.SetActive(true);
+        else
+            drawImg.gameObject.SetActive(true);
     }
 }
