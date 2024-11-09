@@ -45,6 +45,9 @@ public class BoomBrick : Brick
         foreach(var brick in tempBricks)
             brick.rigidbody.AddExplosionForce(force, transform.position, radius, 10f, ForceMode.Impulse);
 
+        if (_useAction != null)
+            _useAction();
+
         _isBoom = true;
     }
 

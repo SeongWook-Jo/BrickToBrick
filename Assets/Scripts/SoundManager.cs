@@ -18,6 +18,10 @@ public class SoundManager : Singleton<SoundManager>
         ChangeBoom,
         BlackHole,
         Boing,
+        Score,
+        Win,
+        Lose,
+        Draw,
     }
 
     [Header("BGM")]

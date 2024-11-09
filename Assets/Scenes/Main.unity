@@ -2288,11 +2288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curBrickPrefab: {fileID: 1532919657602205023, guid: a859c98341ea72348bd733bd156df1b2, type: 3}
   characterAnimator: {fileID: 83344857}
-  throwAnimationController: {fileID: 83344856}
   targetArrow: {fileID: 1654916459}
   powerGauge: {fileID: 802713775}
   coolTimeGauge: {fileID: 1762934695}
-  fireCoolTime: 0.4
+  fireCoolTime: 0.6
   firePower: 25
   additionalSpeedMax: 2.5
   curState: 0
@@ -2308,6 +2307,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1358167492}
     m_Modifications:
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 29b560cf287c90241a80127862e5b743, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: ae0456ff83cbafe4db55aba41c975201, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: edc0093c64786bd4a968e6219b8ebcb0, type: 3}
+    - target: {fileID: 1809009597069579753, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
+      propertyPath: audioClips_SFX.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a1470a8a95f78d4eb37ab1a6da4288e, type: 3}
     - target: {fileID: 3307140632673107737, guid: d8bbdc5c7d0dce3449ad5f213fb16404, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -2743,7 +2762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curBrickPrefab: {fileID: 1532919657602205023, guid: a859c98341ea72348bd733bd156df1b2, type: 3}
   characterAnimator: {fileID: 904054545}
-  throwAnimationController: {fileID: 904054546}
   targetArrow: {fileID: 1874634279}
   powerGauge: {fileID: 825638102}
   coolTimeGauge: {fileID: 1339924197}
@@ -3754,6 +3772,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1336979423}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &1860868896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1860868897}
+  m_Layer: 0
+  m_Name: CameraRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1860868897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860868896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2139598104}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1874634278
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,6 +3881,7 @@ MonoBehaviour:
   player: {fileID: 1501025003}
   enemy: {fileID: 1227424868}
   brickManager: {fileID: 43524330}
+  cameraShakeTran: {fileID: 1860868897}
   totalPlayingTime: 30
 --- !u!4 &1926689895
 Transform:
@@ -4326,12 +4377,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139598101}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1860868897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2139598105
 MonoBehaviour:
@@ -4413,7 +4464,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 227731484}
-  - {fileID: 2139598104}
+  - {fileID: 1860868897}
   - {fileID: 1358167492}
   - {fileID: 1336979423}
   - {fileID: 269571423}

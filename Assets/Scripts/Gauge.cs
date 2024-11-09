@@ -33,11 +33,8 @@ public class Gauge : MonoBehaviour
         initialLocalScale_Y_x2 = initialLocalScale_Y * 2.0f;
     }
 
-    void Update()
+    public void OnUpdate()
     {
-        if (_manager.IsEndGame)
-            return;
-
         if(isGaugeUpDown == true)
         {
             if (isScaleDown == true)
@@ -85,5 +82,15 @@ public class Gauge : MonoBehaviour
         //0 ~ 1.0
         float tempCurPowerRatio = (initialLocalScale_Y_x2 - Mathf.Abs(curPosY)) / initialLocalScale_Y_x2;
         return tempCurPowerRatio;
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
     }
 }

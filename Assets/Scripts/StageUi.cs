@@ -132,10 +132,19 @@ public class StageUi : MonoBehaviour
         exitImg.gameObject.SetActive(true);
 
         if (myAreaBrickCnt < enemyAreaBrickCnt)
+        {
             winImg.gameObject.SetActive(true);
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.Win, false);
+        }
         else if (myAreaBrickCnt > enemyAreaBrickCnt)
+        {
             loseImg.gameObject.SetActive(true);
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.Lose, false);
+        }
         else
+        {
             drawImg.gameObject.SetActive(true);
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.Draw, false);
+        }
     }
 }

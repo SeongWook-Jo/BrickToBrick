@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,6 +29,8 @@ public class Brick : MonoBehaviour
 
     protected StageManager _stageManager;
 
+    protected Action _useAction;
+
     public void Init(StageManager manager)
     {
         _stageManager = manager;
@@ -46,6 +49,11 @@ public class Brick : MonoBehaviour
         }
 
         InitDetail();
+    }
+
+    public void SetUseAction(Action useAction)
+    {
+        _useAction = useAction;
     }
 
     public void SetColor(int colorIdx)

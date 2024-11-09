@@ -66,6 +66,9 @@ public class ChangeBrick : Brick
             instance.ChageBrick();
         }
 
+        if (_useAction != null)
+            _useAction();
+
         _isChange = true;
     }
 

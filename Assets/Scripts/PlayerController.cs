@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    protected readonly float FireWaitTime = 0.35f;
+
     public enum State
     {
         Init,
@@ -16,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] protected GameObject curBrickPrefab;
 
     [SerializeField] protected Animator characterAnimator;
-    [SerializeField] protected ThrowAnimationFrameController throwAnimationController;
 
     [SerializeField] protected TargetArrow targetArrow;       //방향 화살표
     [SerializeField] protected Gauge powerGauge;              //파워 게이지
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     protected float curGaugePower;
     protected Vector3 curTargetDir;
 
+    protected float _currFireWaitTime;
+
     public void Init(StageManager manager)
     {
         _stageManager = manager;
@@ -44,25 +47,28 @@ public class PlayerController : MonoBehaviour
         powerGauge.Init(manager);
 
         coolTimeGauge.Init(manager);
+
+        coolTimeGauge.Show();
+
+        powerGauge.Hide();
+
+        powerGauge.speedMultiplier = 2;
     }
 
-    void Update()
+    public virtual void OnUpdate()
     {
-        if (_stageManager.IsEndGame)
-            return;
-
         //스테이지 시간에 따라 가속도 주기 
         //플레이어는 일단 1로 고정
         speedMultiplier = 1 + (_stageManager.GetRemainTimeRatio() * additionalSpeedMax);
-        powerGauge.speedMultiplier = speedMultiplier;
         coolTimeGauge.speedMultiplier = speedMultiplier;
+
+        coolTimeGauge.OnUpdate();
 
         switch (curState)
         {
             case State.Init:
                 {
-                    powerGauge.gameObject.SetActive(false);
-                    coolTimeGauge.gameObject.SetActive(true);
+                    powerGauge.Hide();
                     coolTimeGauge.InitGauage(fireCoolTime);
                     curState = State.Idle;
                 }
@@ -81,6 +87,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case State.ArrowTargeting:
                 {
+                    powerGauge.Show();
                     curState = State.PowerGauge;
                 }
                 break;
@@ -89,9 +96,7 @@ public class PlayerController : MonoBehaviour
                     //마우스 따라서 화살표 조준하기
                     curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     targetArrow.RotateToTargetPos(curTargetPos);
-
-                    if (powerGauge.gameObject.activeSelf == false)
-                        powerGauge.gameObject.SetActive(true);
+                    powerGauge.OnUpdate();
 
                     //클릭하면 발사
                     if (Input.GetMouseButtonDown(0))
@@ -104,8 +109,10 @@ public class PlayerController : MonoBehaviour
                         curGaugePower = powerGauge.GetCurGauge();
                         curTargetDir = targetArrow.CurDir;
 
-                        powerGauge.gameObject.SetActive(false);
+                        powerGauge.Hide();
                         targetArrow.gameObject.SetActive(false);
+
+                        _currFireWaitTime = 0f;
 
                         curState = State.Fire;
                     }
@@ -113,15 +120,13 @@ public class PlayerController : MonoBehaviour
                 break;
             case State.Fire:
                 {
-                    //애니메이션 던지는 동작 맞춰서 날라가기
-                    if (throwAnimationController.IsReadyToThrow == false)
-                    {
+                    _currFireWaitTime += Time.deltaTime;
+                    
+                    if (FireWaitTime > _currFireWaitTime)
                         break;
-                    }                    
 
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
-                    throwAnimationController.FinishThrowing();
 
                     _stageManager.ShowBrickList.Add(tempBrick);
 
@@ -138,6 +143,12 @@ public class PlayerController : MonoBehaviour
         var brick = Instantiate(newBrick.Item1, transform);
 
         brick.Init(_stageManager);
+
+        if (brick.Type == Brick.BrickType.Chnage || 
+            brick.Type == Brick.BrickType.Boom)
+        {
+            brick.SetUseAction(_stageManager.ShakeCamera);
+        }
 
         brick.SetColor(newBrick.Item2);
 

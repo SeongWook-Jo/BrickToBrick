@@ -17,24 +17,39 @@ public class EnemyController : PlayerController
     float curTargetAngle;
     float angleTimer = 0;
 
-    void Update()
+    public void SetDifficulty(StageManager.DifficultyLevel difficulty)
     {
-        if (_stageManager.IsEndGame)
-            return;
+        switch (difficulty)
+        {
+            case StageManager.DifficultyLevel.Easy:
+                {
+                    fireCoolTime = 0.7f;
+                }
+                break;
+            case StageManager.DifficultyLevel.Hard:
+                {
+                    fireCoolTime = 0.4f;
+                }
+                break;
+        }
+    }
 
+    public override void OnUpdate()
+    {
         //스테이지 시간에 따라 가속도 주기 
         //적군은 점점 빠르게 해주자
         speedMultiplier = 1 + (_stageManager.GetRemainTimeRatio() * additionalSpeedMax);
         powerGauge.speedMultiplier = speedMultiplier;
         coolTimeGauge.speedMultiplier = speedMultiplier;
 
+        coolTimeGauge.OnUpdate();
+
         switch (curState)
         {
             case State.Init:
                 {
                     targetArrow.gameObject.SetActive(false);
-                    powerGauge.gameObject.SetActive(false);
-                    coolTimeGauge.gameObject.SetActive(true);
+                    powerGauge.Hide();
                     coolTimeGauge.InitGauage(fireCoolTime);
                     curState = State.Idle;
                 }
@@ -53,7 +68,6 @@ public class EnemyController : PlayerController
                     targetPowerGauge = Random.Range(powerGaugeMin, powerGaugeMax);
 
                     targetArrow.gameObject.SetActive(true);
-
 
                     //시작 앵글 랜덤
                     angleTimer = Random.Range(0, 181);
@@ -77,15 +91,14 @@ public class EnemyController : PlayerController
                     remainArrowTargetingDelay -= Time.deltaTime * speedMultiplier;
                     if (remainArrowTargetingDelay <= 0)
                     {
+                        powerGauge.Show();
                         curState = State.PowerGauge;
                     }
                 }
                 break;
             case State.PowerGauge:
                 {
-                    if (powerGauge.gameObject.activeSelf == false)
-                        powerGauge.gameObject.SetActive(true);
-
+                    powerGauge.OnUpdate();
                     //파워 게이지 타겟범위 안에 들어오면 발사 오차 +- 0.02f
                     float tempCurPowerGauge = powerGauge.GetCurGauge();
                     if (targetPowerGauge - 0.02f <= tempCurPowerGauge && tempCurPowerGauge <= targetPowerGauge + 0.02f)
@@ -97,7 +110,9 @@ public class EnemyController : PlayerController
 
                         curGaugePower = powerGauge.GetCurGauge();
                         curTargetDir = targetArrow.CurDir;
-                        powerGauge.gameObject.SetActive(false);
+                        powerGauge.Hide();
+
+                        _currFireWaitTime = 0f;
 
                         curState = State.Fire;
                     }
@@ -105,15 +120,13 @@ public class EnemyController : PlayerController
                 break;
             case State.Fire:
                 {
-                    //애니메이션 던지는 동작 맞춰서 날라가기
-                    if (throwAnimationController.IsReadyToThrow == false)
-                    {
+                    _currFireWaitTime += Time.deltaTime;
+
+                    if (FireWaitTime > _currFireWaitTime)
                         break;
-                    }
 
                     Brick tempBrick = GetNewBrick();
                     tempBrick.Launch(curTargetDir, firePower * curGaugePower);
-                    throwAnimationController.FinishThrowing();
 
                     _stageManager.ShowBrickList.Add(tempBrick);
 

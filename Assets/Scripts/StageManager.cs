@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
+    public enum GameMultiType
+    {
+        PvE,
+        PvP,
+    }
+
+    public enum DifficultyLevel
+    {
+        Easy,
+        Hard,
+    }
+
+    public static GameMultiType GameType { get; set; }
+
+    public static DifficultyLevel Difficulty { get; set; }
+
     public Queue<(Brick, int)> PlayerBricks { get => _playerBricks; }
     public Queue<(Brick, int)> EnemyBricks { get => _enemyBricks; }
 
@@ -16,6 +32,8 @@ public class StageManager : MonoBehaviour
     public EnemyController enemy;
 
     public BrickManager brickManager;
+
+    public Transform cameraShakeTran;
 
     public List<Brick> ShowBrickList { get; private set; }
 
@@ -54,6 +72,8 @@ public class StageManager : MonoBehaviour
         player.Init(this);
 
         enemy.Init(this);
+
+        enemy.SetDifficulty(Difficulty);
 
         for (int i = 0; i < ShowBrickCount; i++)
         {
@@ -119,6 +139,8 @@ public class StageManager : MonoBehaviour
 
             var viewPortPoint = cam.WorldToViewportPoint(brick.transform.position);
 
+            var soundSource = SoundManager.Instance.PlaySFX(SoundManager.SFX.Score, false);
+
             if (viewPortPoint.x < 0.5f)
                 myAreaBrickCnt++;
             else
@@ -159,5 +181,43 @@ public class StageManager : MonoBehaviour
     {
         float tempRatio = _currTime / totalPlayingTime;
         return tempRatio;
+    }
+
+    private Coroutine _coShakeCamera;
+
+    public void ShakeCamera()
+    {
+        if (_coShakeCamera  != null)
+            return;
+
+        _coShakeCamera = StartCoroutine(CoShakeCamera(0.3f, 0.4f));
+    }
+
+    private IEnumerator CoShakeCamera(float duration, float magnitude)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            Vector2 shakePos = Random.insideUnitCircle * magnitude;
+
+            cameraShakeTran.localPosition = shakePos;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        cameraShakeTran.localPosition = Vector3.zero;
+
+        _coShakeCamera = null;
+    }
+
+    void Update()
+    {
+        if (IsEndGame)
+            return;
+
+        player.OnUpdate();
+        enemy.OnUpdate();
     }
 }
