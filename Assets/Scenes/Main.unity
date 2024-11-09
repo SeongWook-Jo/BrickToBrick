@@ -2291,7 +2291,7 @@ MonoBehaviour:
   targetArrow: {fileID: 1654916459}
   powerGauge: {fileID: 802713775}
   coolTimeGauge: {fileID: 1762934695}
-  fireCoolTime: 0.6
+  fireCoolTime: 0.4
   firePower: 25
   additionalSpeedMax: 2.5
   curState: 0
