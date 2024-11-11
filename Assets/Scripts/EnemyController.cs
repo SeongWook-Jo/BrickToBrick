@@ -23,12 +23,14 @@ public class EnemyController : PlayerController
         {
             case StageManager.DifficultyLevel.Easy:
                 {
-                    fireCoolTime = 0.7f;
+                    fireCoolTime = 1.0f;
+                    additionalSpeedMax = 1.0f;
                 }
                 break;
             case StageManager.DifficultyLevel.Hard:
                 {
                     fireCoolTime = 0.4f;
+                    additionalSpeedMax = 2.5f;
                 }
                 break;
         }

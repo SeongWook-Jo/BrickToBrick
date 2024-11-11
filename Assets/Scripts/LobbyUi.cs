@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LobbyUi : MonoBehaviour
 {
+    public GameObject mainObj;
+    public GameObject difficultyObj;
     public GameObject howtoplayObj;
     public GameObject creditObj;
     public GameObject bricksRootObj;
@@ -24,6 +26,7 @@ public class LobbyUi : MonoBehaviour
 
         howtoplayObj.gameObject.SetActive(false);
         creditObj.gameObject.SetActive(false);
+        difficultyObj.gameObject.SetActive(false);
 
         var childCnt = bricksRootObj.transform.childCount;
 
@@ -57,6 +60,19 @@ public class LobbyUi : MonoBehaviour
 
     public void OnClickGameStart()
     {
+        mainObj.gameObject.SetActive(false);
+        difficultyObj.gameObject.SetActive(true);
+    }
+
+    public void OnClickEasy()
+    {
+        StageManager.Difficulty = StageManager.DifficultyLevel.Easy;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void OnClickHard()
+    {
+        StageManager.Difficulty = StageManager.DifficultyLevel.Hard;
         SceneManager.LoadScene("Main");
     }
 
