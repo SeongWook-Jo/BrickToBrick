@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class TargetArrow : MonoBehaviour
 {
+    public float rotSpeed = 100f;
+
+    private float _minAngle;
+
+    private float _maxAngle;
+
     Vector3 dir = Vector3.zero;
+
+    public Vector3 CustomCurDir { get { return transform.right; } }
+
     public Vector3 CurDir 
     {
         get
         {
             return dir.normalized;
         }
+    }
+
+    public void Init(float minAngle, float maxAngle)
+    {
+        _minAngle = minAngle;
+
+        _maxAngle = maxAngle;
     }
 
     public void RotateToTargetPos(Vector3 _targetGlobalPos)
@@ -32,5 +48,35 @@ public class TargetArrow : MonoBehaviour
 
         //회전한 방향 반환
         return dir;
+    }
+
+    public void Up()
+    {
+        transform.Rotate(Vector3.forward, rotSpeed * Time.deltaTime);
+
+        ClampRot();
+    }
+
+    public void Down()
+    {
+        transform.Rotate(-Vector3.forward, rotSpeed * Time.deltaTime);
+
+        ClampRot();
+    }
+
+    private void ClampRot()
+    {
+        var currZ = transform.localEulerAngles.z;
+
+        if (currZ < 180)
+            currZ = Mathf.Clamp(currZ, currZ, _maxAngle);
+        else
+        {
+            currZ -= 360;
+
+            currZ = Mathf.Clamp(currZ, _minAngle, 0);
+        }
+
+        transform.localEulerAngles = new Vector3(0, 0, currZ);
     }
 }

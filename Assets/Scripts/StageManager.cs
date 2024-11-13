@@ -6,8 +6,8 @@ public class StageManager : MonoBehaviour
 {
     public enum GameMultiType
     {
-        PvE,
-        PvP,
+        Single,
+        Multi,
     }
 
     public enum DifficultyLevel
@@ -16,7 +16,7 @@ public class StageManager : MonoBehaviour
         Hard,
     }
 
-    public static GameMultiType GameType { get; set; }
+    public static GameMultiType MultiType { get; set; }
 
     public static DifficultyLevel Difficulty { get; set; }
 
@@ -27,17 +27,25 @@ public class StageManager : MonoBehaviour
 
     public bool IsEndGame { get; private set; }
 
-    public PlayerController player;
+    public StageUi StageUi { get { return _stageUi; } }
+
+    public PlayerController player1;
+
+    public PlayerController player2;
 
     public EnemyController enemy;
 
     public BrickManager brickManager;
 
     public Transform cameraShakeTran;
+    public Transform player1Pos;
+    public Transform player2Pos;
 
     public List<Brick> ShowBrickList { get; private set; }
 
     public float totalPlayingTime;
+
+    private bool _isMulti { get {return MultiType == GameMultiType.Multi; } }
 
     private float _currTime;
 
@@ -69,11 +77,46 @@ public class StageManager : MonoBehaviour
         _playerBricks = new Queue<(Brick, int)>();
         _enemyBricks = new Queue<(Brick, int)>();
 
-        player.Init(this);
+        var playerPref = Resources.Load<GameObject>("Prefabs/Player");
 
-        enemy.Init(this);
+        player1 = Instantiate(playerPref, player1Pos).GetComponentInChildren<PlayerController>();
 
-        enemy.SetDifficulty(Difficulty);
+        player1.Init(this, _playerBricks);
+
+        player1.SetPlayerInput(new PlayerInput(KeyCode.W, KeyCode.S, KeyCode.Space));
+
+        player1.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+
+        if (_isMulti == false)
+        {
+            var enemyPref = Resources.Load<GameObject>("Prefabs/Enemy");
+
+            enemy = Instantiate(enemyPref, player2Pos).GetComponentInChildren<EnemyController>();
+
+            enemy.Init(this, _enemyBricks);
+
+            enemy.SetDifficulty(Difficulty);
+
+            enemy.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        }
+        else
+        {
+            player2 = Instantiate(playerPref, player2Pos).GetComponentInChildren<PlayerController>();
+
+            player2.Init(this, _enemyBricks);
+
+            player2.SetPlayerInput(new PlayerInput(KeyCode.Keypad8, KeyCode.Keypad5, KeyCode.Return));
+
+            player2.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+
+            player2.powerGauge.transform.localRotation = Quaternion.Euler(0, 180f, 0);
+
+            var coolTimeGaugePos = player2.coolTimeGauge.transform.localPosition;
+
+            player2.coolTimeGauge.transform.localPosition = new Vector3(coolTimeGaugePos.x, coolTimeGaugePos.y, 5f);
+
+            player2.coolTimeGauge.transform.localRotation = Quaternion.Euler(0, 180f, 90f);
+        }
 
         for (int i = 0; i < ShowBrickCount; i++)
         {
@@ -217,7 +260,11 @@ public class StageManager : MonoBehaviour
         if (IsEndGame)
             return;
 
-        player.OnUpdate();
-        enemy.OnUpdate();
+        player1.OnUpdate();
+
+        if (_isMulti)
+            player2.OnUpdate();
+        else
+            enemy.OnUpdate();
     }
 }

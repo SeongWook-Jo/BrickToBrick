@@ -24,9 +24,9 @@ public class LobbyUi : MonoBehaviour
     {
         brickList = new List<Brick>();
 
-        howtoplayObj.gameObject.SetActive(false);
-        creditObj.gameObject.SetActive(false);
-        difficultyObj.gameObject.SetActive(false);
+        howtoplayObj.SetActive(false);
+        creditObj.SetActive(false);
+        difficultyObj.SetActive(false);
 
         var childCnt = bricksRootObj.transform.childCount;
 
@@ -50,40 +50,54 @@ public class LobbyUi : MonoBehaviour
 
     public void OnClickShowHowToPlay()
     { 
-        howtoplayObj.gameObject.SetActive(true);
+        howtoplayObj.SetActive(true);
     }
 
     public void OnClickHideHowToPlay()
     {
-        howtoplayObj.gameObject.SetActive(false);
+        howtoplayObj.SetActive(false);
     }
 
     public void OnClickGameStart()
     {
-        mainObj.gameObject.SetActive(false);
-        difficultyObj.gameObject.SetActive(true);
+        mainObj.SetActive(false);
+        difficultyObj.SetActive(true);
     }
 
     public void OnClickEasy()
     {
+        StageManager.MultiType = StageManager.GameMultiType.Single;
         StageManager.Difficulty = StageManager.DifficultyLevel.Easy;
         SceneManager.LoadScene("Main");
     }
 
     public void OnClickHard()
     {
+        StageManager.MultiType = StageManager.GameMultiType.Single;
         StageManager.Difficulty = StageManager.DifficultyLevel.Hard;
         SceneManager.LoadScene("Main");
     }
 
+    public void OnClickMultiPlay()
+    {
+        StageManager.MultiType = StageManager.GameMultiType.Multi;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void OnClickBackBtn()
+    {
+        mainObj.SetActive(true);
+        difficultyObj.SetActive(false);
+    }
+
     public void OnClickShowCredit()
     {
-        creditObj.gameObject.SetActive(true);
+        creditObj.SetActive(true);
     }
 
     public void OnClickHideCredit()
     {
-        creditObj.gameObject.SetActive(false);
+        creditObj.SetActive(false);
     }
 
     private void Update()

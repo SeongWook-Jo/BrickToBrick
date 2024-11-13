@@ -137,17 +137,4 @@ public class EnemyController : PlayerController
                 break;
         }
     }
-
-    protected override Brick GetNewBrick()
-    {
-        var newBrick = _stageManager.GetEnemyBrick();
-
-        var brick = Instantiate(newBrick.Item1, transform);
-
-        brick.Init(_stageManager);
-
-        brick.SetColor(newBrick.Item2);
-
-        return brick;
-    }
 }

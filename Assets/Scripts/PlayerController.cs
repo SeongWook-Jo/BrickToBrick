@@ -15,13 +15,14 @@ public class PlayerController : MonoBehaviour
         Fire                //발사        
     }
 
+    public Gauge powerGauge;              //파워 게이지
+    public Gauge coolTimeGauge;           //쿨탐 게이지
+
     [SerializeField] protected GameObject curBrickPrefab;
 
     [SerializeField] protected Animator characterAnimator;
 
     [SerializeField] protected TargetArrow targetArrow;       //방향 화살표
-    [SerializeField] protected Gauge powerGauge;              //파워 게이지
-    [SerializeField] protected Gauge coolTimeGauge;           //쿨탐 게이지
 
     [SerializeField] protected float fireCoolTime;
     [SerializeField] protected float firePower;
@@ -40,9 +41,15 @@ public class PlayerController : MonoBehaviour
 
     protected float _currFireWaitTime;
 
-    public void Init(StageManager manager)
+    protected Queue<(Brick, int)> _bricks;
+
+    private PlayerInput _playerInput;
+
+    public void Init(StageManager manager, Queue<(Brick, int)> bricks)
     {
         _stageManager = manager;
+
+        _bricks = bricks;
 
         powerGauge.Init(manager);
 
@@ -52,7 +59,14 @@ public class PlayerController : MonoBehaviour
 
         powerGauge.Hide();
 
+        targetArrow.Init(-25f, 60f);
+
         powerGauge.speedMultiplier = 2;
+    }
+
+    public void SetPlayerInput(PlayerInput input)
+    {
+        _playerInput = input;
     }
 
     public virtual void OnUpdate()
@@ -93,13 +107,19 @@ public class PlayerController : MonoBehaviour
                 break;
             case State.PowerGauge:
                 {
-                    //마우스 따라서 화살표 조준하기
-                    curTargetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    targetArrow.RotateToTargetPos(curTargetPos);
                     powerGauge.OnUpdate();
 
-                    //클릭하면 발사
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetKey(_playerInput.Up))
+                    {
+                        targetArrow.Up();
+                    }
+
+                    if (Input.GetKey(_playerInput.Down))
+                    {
+                        targetArrow.Down();
+                    }
+
+                    if (Input.GetKeyDown(_playerInput.Shot))
                     {
                         if (characterAnimator != null)
                         {
@@ -107,7 +127,7 @@ public class PlayerController : MonoBehaviour
                         }
 
                         curGaugePower = powerGauge.GetCurGauge();
-                        curTargetDir = targetArrow.CurDir;
+                        curTargetDir = targetArrow.CustomCurDir;
 
                         powerGauge.Hide();
                         targetArrow.gameObject.SetActive(false);
@@ -136,11 +156,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    protected virtual Brick GetNewBrick()
+    protected Brick GetNewBrick()
     {
-        var newBrick = _stageManager.GetPlayerBrick();
+        var newBrick = GetNextBrick();
 
-        var brick = Instantiate(newBrick.Item1, transform);
+        var brick = Instantiate(newBrick.Item1, transform.position, newBrick.Item1.transform.rotation);
 
         brick.Init(_stageManager);
 
@@ -151,6 +171,19 @@ public class PlayerController : MonoBehaviour
         }
 
         brick.SetColor(newBrick.Item2);
+
+        return brick;
+    }
+
+    public (Brick, int) GetNextBrick()
+    {
+        var brick = _bricks.Dequeue();
+
+        _bricks.Enqueue(BrickManager.Instance.GetBrick());
+
+        _stageManager.StageUi.RefreshPlayerBrickQueue();
+
+        _stageManager.StageUi.RefreshEnemyBrickQueue();
 
         return brick;
     }
